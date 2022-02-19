@@ -201,7 +201,7 @@ and predict how much it will become five years later, based on the formerly deve
   (i.e. the price at the end of the trading hours),
   and our trade is made at that market closing time ideally.
   \item \textbf{Ignore market impact}\\
-  The amount of funds we put into the market is so little
+  The amount of funds we put into the market is very little
   compared to the total assets in the market.
   Thus, we assume that our actions have zero effect on the market itself.
   \item \textbf{Instant trading}\\
@@ -280,7 +280,7 @@ trying to improve the algorithm accuracy.
 Deep learning is part of machine learning and also part of artificial intelligence,
 based on artificial neural networks, or ANN.
 ANN is inspired by the biological neural network
-and shares a similar structure with it, as picture[\ref{ANN}] shows:
+and shares a similar structure with it, as diagram[\ref{ANN}] shows:
 
 \begin{figure}[h]
 \small
@@ -316,7 +316,7 @@ extra observations don't efficiently reduce the error rate.
 \subsubsection{Reinforcement learning}
 
  Reinforcement learning is a field of deep learning.
-Picture[\ref{LA}] shows the basic elements of reinforcement learning:
+Diagram[\ref{LA}] shows the basic elements of reinforcement learning:
 
 \begin{figure}[h]
   \small
@@ -370,12 +370,12 @@ A MDP can be described as a 4-tuple:
 \begin{itemize}
   \item $\pmb{S}$ is the set of states, called the state space;
   \item $\pmb{A}$ is the set of actions, called the action space;
-  \item $\pmb{P}_a(s_t, s_{t+1})$ is the probability that action $a$ in state $s_t$ in time $t$ will lead to state $s_{t+1}$ in time $t+1$;
-  \item $\pmb{R}_a(s_t, s_{t+1})$ is the expected reward received in time $t+1$, based on state $s_t$ and action $a$ in time $t$.
+  \item $\pmb{P}_a(s_t, s_{t+1})$ is the probability that action $a$ in state $s_t$ on day $t$ will lead to state $s_{t+1}$ on day $t+1$;
+  \item $\pmb{R}_a(s_t, s_{t+1})$ is the expected reward received on day $t+1$, based on state $s_t$ and action $a$ on day $t$.
 \end{itemize}
 
 These elements make the foundation of MDPs.
-A simplified MDP is shown in picture[\ref{MDP}].
+A simplified MDP is shown in diagram[\ref{MDP}].
 
 \begin{figure}[h]
   \small
@@ -400,7 +400,7 @@ tbd
 \subsection{Model building}
 
 This part presents a solution based on Reinforcement learning,
-using a proximal policy optimization algorithm.
+using a \textbf{proximal policy optimization} algorithm.
 
 \subsubsection{The environment, agent and state}
 
@@ -411,7 +411,7 @@ by the current and historical price of gold and bitcoin.
 The \textit{agent} is the reinforcement learning algorithm which
 continuously trades in the environment.
 
-The \textit{state} at time $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of three parts:
+The \textit{state} on day $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of three parts:
 
 \begin{itemize}
   \item $\pmb{w}_t = (w_1, w_2, w_3)$, or the weight vector \\is a 3-tuple.
@@ -429,7 +429,7 @@ The \textit{state} at time $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made
   so $\pmb{p}$ can be expressed in the form $(1,p_2,p_3)$.
 
   \item $\rho _t$\\
-  stands for the total amount of funds we hold at time $t$.
+  stands for the total amount of funds we hold on day $t$.
   $\rho _t$ is the sum of current cash holdings and the market value of gold and bitcoin.
   According to this definition, $\rho _1$ on day 1 is 1000\$.
 \end{itemize}
@@ -437,15 +437,15 @@ The \textit{state} at time $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made
 \subsubsection{The action and the reward}
 
 \textit{Actions} are what the agent performs.
-What an action $a_t$ does is to effect the state $s_t$ at time $t$
-and change it to state $s_{t+1}$ at time $t+1$,
+What an action $a_t$ does is to effect the state $s_t$ on day $t$
+and change it to state $s_{t+1}$ on day $t+1$,
 producing \textit{rewards} $r_t$ in the process.
 In the case of our RL model,
 $\pmb{p}$ is determined by the actual market data and influenced by actions,
 according to the zero market impact hypothesis.
 Also, $\rho $ is calculated afterwards using previous data.
 Only $\pmb{w}$ is effected directly by actions.
-The way in which actions affect the state is shown in picture[\ref{action}]:
+The way in which actions affect the state is shown in graph[\ref{action}]:
 
 \begin{figure}[h]
   \centering
@@ -470,7 +470,7 @@ The way in which actions affect the state is shown in picture[\ref{action}]:
   \caption{An action of the agent} \label{action}
 \end{figure}
 
-The action done between time $t$ and time $t+1$ changes $\pmb{w}_t$ to $\pmb{w}_{t+1}$,
+The action done between day $t$ and day $t+1$ changes $\pmb{w}_t$ to $\pmb{w}_{t+1}$,
 effecting $\rho $ in the process.
 Total funds $\rho _{t+1}$ is calculated using
 $\rho _t$, $\pmb{w}_t$, $\pmb{w}_{t+1}$, $\pmb{p}_t$ and $\pmb{p}_{t+1}$,
@@ -493,7 +493,7 @@ we introduce a new variable $\pmb{A}_t$:
 
 where $\oslash$ is the element-wise division operator.
 $\pmb{A}_t$ is also a 3-tuple.
-It indicates how many \textit{units} of holdings the agent holds at time $t$,
+It indicates how many \textit{units} of holdings the agent holds on day $t$,
 based on all the elements of the current state:
 total amount of fund $\rho_t$, the allocation of assets $\pmb{w}_t$,
 and the current market price $\pmb{p}_t$.
@@ -501,11 +501,34 @@ We can express the change in holdings in terms of the amount of change in $\pmb{
 For one certain asset,
 a positive or negative $\Delta A$ corresponds to the agent buying or selling the asset respectively.
 
-tbd
+According to the question, a commission must be paid after each transaction is done,
+$1\%$ for gold and $2\%$ for bitcoin.
+A new vector $\pmb{c}$ is introduced to store this information,
+$\pmb{c} = (0, 0.01, 0.02)$.
+
+The formulae used when buying and selling differ when taking $\pmb{C}$ into account.
+For those products that we buy,
+the amount spent on the purchase is greater than the actual value of the purchase,
+which is $c\%$ less than the former.
+The actual amount spent on day $t+1$ can be calculated using equation \ref{buy-in}:
+
+\begin{equation}
+  \frac{p_{t+1} \cdot \Delta A_{t+1}}{1-c}
+  \label{buy-in}
+\end{equation}
+
+The numerator, $p_{t+1} \cdot \Delta A_{t+1}$,
+is the ideal amount spent on the buy-in when there is no commission.
+Similarly, the formula for the asset that we sell is:
+
+\begin{equation}
+  p_{t+1} \cdot \Delta A_{t+1} \cdot (1 - c).
+\end{equation}
 
 \subsection{The Model Results}
 
-123[\ref{RL-Results}]
+The output of the RL model is shown in the following line chart[\ref{RL-Results}].
+
 
 \begin{figure}[h]
   \small
@@ -514,16 +537,8 @@ tbd
   \caption{Reinforcement learning results} \label{RL-Results}
 \end{figure}
 
-\subsection{Validating the Model}
-\lipsum[9]
-
 \section{Conclusions}
 \lipsum[6]
-
-\section{A Summary}
-\lipsum[6]
-
-\section{Evaluate of the Mode}
 
 \section{Strengths and weaknesses}
 \lipsum[12]
