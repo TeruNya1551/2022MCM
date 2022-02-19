@@ -110,7 +110,7 @@ which can be rather relatively stable ones such as national debt,
 or volatile assets, for example, gold and bitcoin.
 While investing can make profits, it can also carry certain risks,
 especially when the product is relatively unstable.
-To maximize the profit and lower the risk of an investment,
+To maximize the profit and minimize the risk of an investment,
 traders usually invest in several products at a time
 and decide the holdings of each asset based on actual market conditions.
 In terminology, this method is called \textit{portfolio management}.
@@ -119,7 +119,7 @@ Portfolio management is the process of managing investments,
 constantly rearranging a certain amount of funds into several products or assets,
 aiming at maximizing profit and ensuring low market risks at the same time.
 There have been several traditional methods to solve this problem,
-which can be roughly be classified as these four categories\cite{li2014online}:
+which can be roughly classified into these four categories\cite{li2014online}:
 
 \begin{itemize}
   \item \textbf{Follow the winner}\\
@@ -188,7 +188,7 @@ and predict how much it will become five years later, based on the formerly deve
 
 \begin{itemize}
   \item \textbf{Market closure days}\\
-  There are cases that data is blank in the gold price data given.
+  There are cases that data is missing in the gold price data given.
   It can be observed that this vacancy basically occurs on weekends
   and during holidays such as Christmas day and the days around.
   We assume such vacancies occur on and only on gold market closure days.
@@ -197,15 +197,15 @@ and predict how much it will become five years later, based on the formerly deve
   \item \textbf{Trade at the end of the day}\\
   Price changes during the trading hours each day are not taken into consideration
   as there is no relevant data.
-  We assume that the data given in the question is the \textit{closing price},
-  or the price at the end of the trading hours,
-  and our trade is made at that market closing time.
+  We assume that the data given in the question is the \textit{closing price}
+  (i.e. the price at the end of the trading hours),
+  and our trade is made at that market closing time ideally.
   \item \textbf{Ignore market impact}\\
   The amount of funds we put into the market is so little
   compared to the total assets in the market.
   Thus, we assume that our actions have zero effect on the market itself.
   \item \textbf{Instant trading}\\
-  Transactions in the market are so fast that can be considered immediate.
+  Transactions in the market are fast enough to be considered immediate.
   This allows us to take out or put in money once we make a trade, with no delay.
 \end{itemize}
 
@@ -335,10 +335,10 @@ Players will continuously change their actions to maximize their rewards.
 
 A reinforcement learning model works just like that,
 but there is no game guides it can refer to --
-all given to the model is some "in-game data".
+all given to the model is some ``in-game data''.
 Reinforcement learning does not require a large quantity of data to feed,
 as supervised learning and unsupervised learning do.
-Briefly, reinforcement learning is a "trial and error" approach to learning,
+Briefly, reinforcement learning is a ``trial and error'' approach to learning,
 interacting constantly with the environment to gain feedback and
 adjust behavior for maximum reward.
 
@@ -416,7 +416,7 @@ The \textit{state} at time $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made
 \begin{itemize}
   \item $\pmb{w}_t = (w_1, w_2, w_3)$, or the weight vector \\is a 3-tuple.
   It describes the allocation of three types of assets.
-  The three elements in $\pmb{w}$ stands for the percentage of cash, gold and bitcoin in order,
+  The three elements in $\pmb{w}$ stands for the percentage of cash, gold and bitcoin respectively,
   and it's clear that the sum of these percentages ($w_1+w_2+w_3$) is equal to 1.\\
   All our assets were held in cash at the very beginning,
   which means that regardless of the actions afterwards,
@@ -497,12 +497,22 @@ It indicates how many \textit{units} of holdings the agent holds at time $t$,
 based on all the elements of the current state:
 total amount of fund $\rho_t$, the allocation of assets $\pmb{w}_t$,
 and the current market price $\pmb{p}_t$.
-We can express the change in holdings in terms of the amount of change in $\pmb{A}$.
+We can express the change in holdings in terms of the amount of change in $\pmb{A}$ ($\Delta \pmb{A}$).
 For one certain asset,
+a positive or negative $\Delta A$ corresponds to the agent buying or selling the asset respectively.
+
+tbd
 
 \subsection{The Model Results}
 
-\lipsum[8]
+123[\ref{RL-Results}]
+
+\begin{figure}[h]
+  \small
+  \centering
+  \includegraphics[width=12cm]{RL-output-new.png}
+  \caption{Reinforcement learning results} \label{RL-Results}
+\end{figure}
 
 \subsection{Validating the Model}
 \lipsum[9]
