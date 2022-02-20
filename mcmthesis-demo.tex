@@ -301,10 +301,13 @@ An workflow of the autoregressive model is shown in figure \ref{AR}.
 
 \subsubsection{Determine whether the data is stationary}
 The autoregressive model can only be applied to predict economic phenomena related to its own previous period (also known as its data stationary/weak stationary), such as economic phenomena that are greatly affected by its own historical factors, the mining volume of mines, the output of various natural resources etc.For economic phenomena that are greatly affected by social factors, autoregressive models are not suitable. Therefore, before establishing an autoregressive model, we first need to judge whether the subject conditions meet the requirements for establishing an autoregressive model.\\
-First of all ,formulate the null hypothesis $H_0$ :There is a unit root/UNIT ROOT (that is, the data is not stationary).\\
+First of all ,formulate the null hypothesis $H_0$ :
+\[
+ H_0 : \mbox{Here is a unit root/UNIT ROOT}
+\]
 % 存在单位根/UNIT ROOT（即数据不平稳）
 % 自回归模型只能适用于预测与自身前期相关的经济现象（也称作其数据平稳/弱平稳），例如受到自身历史因素影响较大的经济现象，如矿的开采量，各种自然资源产量等；对于受到社会因素影响较大的经济现象，不宜采用自回归模型。因此，在建立自回归模型之前，我们首先需要判断一下题目条件是否符合自回归模型的建立要求
-  By using \textit{Augmented Dickey-Fuller Test},we can get the following results(three decimal places):\\
+Now to do hypothesis testing. In existing statistics we can do it with \textit{Augmented Dickey-Fuller Test}(ADF test),which is always used to identify whether there is a single root in the sample data of individual variables in time series analysis. By using ADF test,we can get the following results(three decimal places):\\
   \begin{table}[H]
     \centering
     \begin{tabular}{@{}lr@{}}
