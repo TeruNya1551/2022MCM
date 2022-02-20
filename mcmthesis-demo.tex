@@ -110,7 +110,7 @@ which can be rather relatively stable ones such as national debt,
 or volatile assets, for example, gold and bitcoin.
 While investing can make profits, it can also carry certain risks,
 especially when the product is relatively unstable.
-To maximize the profit and lower the risk of an investment,
+To maximize the profit and minimize the risk of an investment,
 traders usually invest in several products at a time
 and decide the holdings of each asset based on actual market conditions.
 In terminology, this method is called \textit{portfolio management}.
@@ -119,7 +119,7 @@ Portfolio management is the process of managing investments,
 constantly rearranging a certain amount of funds into several products or assets,
 aiming at maximizing profit and ensuring low market risks at the same time.
 There have been several traditional methods to solve this problem,
-which can be roughly be classified as these four categories\cite{li2014online}:
+which can be roughly classified into these four categories\cite{li2014online}:
 
 \begin{itemize}
   \item \textbf{Follow the winner}\\
@@ -135,7 +135,7 @@ which can be roughly be classified as these four categories\cite{li2014online}:
 There're many algorithms that combine these methods with machine learning.
 These algorithms are reliable in short-term prediction
 but do not behave well in long-term prediction.
-This is because the algorithm highly depends on accuracy,
+This is because the algorithms highly depends on their accuracy,
 but the natural uncertainty of the market makes it hard to predict.
 
 \subsection{Restatement of the problem}
@@ -188,7 +188,7 @@ and predict how much it will become five years later, based on the formerly deve
 
 \begin{itemize}
   \item \textbf{Market closure days}\\
-  There are cases that data is blank in the gold price data given.
+  There are cases that data is missing in the gold price data given.
   It can be observed that this vacancy basically occurs on weekends
   and during holidays such as Christmas day and the days around.
   We assume such vacancies occur on and only on gold market closure days.
@@ -197,15 +197,15 @@ and predict how much it will become five years later, based on the formerly deve
   \item \textbf{Trade at the end of the day}\\
   Price changes during the trading hours each day are not taken into consideration
   as there is no relevant data.
-  We assume that the data given in the question is the \textit{closing price},
-  or the price at the end of the trading hours,
-  and our trade is made at that market closing time.
+  We assume that the data given in the question is the \textit{closing price}
+  (i.e. the price at the end of the trading hours),
+  and our trade is made at that market closing time ideally.
   \item \textbf{Ignore market impact}\\
-  The amount of funds we put into the market is so little
+  The amount of funds we put into the market is very little
   compared to the total assets in the market.
   Thus, we assume that our actions have zero effect on the market itself.
   \item \textbf{Instant trading}\\
-  Transactions in the market are so fast that can be considered immediate.
+  Transactions in the market are fast enough to be considered immediate.
   This allows us to take out or put in money once we make a trade, with no delay.
 \end{itemize}
 
@@ -280,7 +280,7 @@ trying to improve the algorithm accuracy.
 Deep learning is part of machine learning and also part of artificial intelligence,
 based on artificial neural networks, or ANN.
 ANN is inspired by the biological neural network
-and shares a similar structure with it, as picture[\ref{ANN}] shows:
+and shares a similar structure with it, as diagram[\ref{ANN}] shows:
 
 \begin{figure}[h]
 \small
@@ -316,7 +316,7 @@ extra observations don't efficiently reduce the error rate.
 \subsubsection{Reinforcement learning}
 
  Reinforcement learning is a field of deep learning.
-Picture[\ref{LA}] shows the basic elements of reinforcement learning:
+Diagram[\ref{LA}] shows the basic elements of reinforcement learning:
 
 \begin{figure}[h]
   \small
@@ -335,10 +335,10 @@ Players will continuously change their actions to maximize their rewards.
 
 A reinforcement learning model works just like that,
 but there is no game guides it can refer to --
-all given to the model is some "in-game data".
+all given to the model is some ``in-game data''.
 Reinforcement learning does not require a large quantity of data to feed,
 as supervised learning and unsupervised learning do.
-Briefly, reinforcement learning is a "trial and error" approach to learning,
+Briefly, reinforcement learning is a ``trial and error'' approach to learning,
 interacting constantly with the environment to gain feedback and
 adjust behavior for maximum reward.
 
@@ -370,12 +370,12 @@ A MDP can be described as a 4-tuple:
 \begin{itemize}
   \item $\pmb{S}$ is the set of states, called the state space;
   \item $\pmb{A}$ is the set of actions, called the action space;
-  \item $\pmb{P}_a(s_t, s_{t+1})$ is the probability that action $a$ in state $s_t$ in time $t$ will lead to state $s_{t+1}$ in time $t+1$;
-  \item $\pmb{R}_a(s_t, s_{t+1})$ is the expected reward received in time $t+1$, based on state $s_t$ and action $a$ in time $t$.
+  \item $\pmb{P}_a(s_t, s_{t+1})$ is the probability that action $a$ in state $s_t$ on day $t$ will lead to state $s_{t+1}$ on day $t+1$;
+  \item $\pmb{R}_a(s_t, s_{t+1})$ is the expected reward received on day $t+1$, based on state $s_t$ and action $a$ on day $t$.
 \end{itemize}
 
 These elements make the foundation of MDPs.
-A simplified MDP is shown in picture[\ref{MDP}].
+A simplified MDP is shown in diagram[\ref{MDP}].
 
 \begin{figure}[h]
   \small
@@ -400,7 +400,7 @@ tbd
 \subsection{Model building}
 
 This part presents a solution based on Reinforcement learning,
-using a proximal policy optimization algorithm.
+using a \textbf{proximal policy optimization} algorithm.
 
 \subsubsection{The environment, agent and state}
 
@@ -411,12 +411,12 @@ by the current and historical price of gold and bitcoin.
 The \textit{agent} is the reinforcement learning algorithm which
 continuously trades in the environment.
 
-The \textit{state} at time $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of three parts:
+The \textit{state} on day $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of three parts:
 
 \begin{itemize}
   \item $\pmb{w}_t = (w_1, w_2, w_3)$, or the weight vector \\is a 3-tuple.
   It describes the allocation of three types of assets.
-  The three elements in $\pmb{w}$ stands for the percentage of cash, gold and bitcoin in order,
+  The three elements in $\pmb{w}$ stands for the percentage of cash, gold and bitcoin respectively,
   and it's clear that the sum of these percentages ($w_1+w_2+w_3$) is equal to 1.\\
   All our assets were held in cash at the very beginning,
   which means that regardless of the actions afterwards,
@@ -429,7 +429,7 @@ The \textit{state} at time $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made
   so $\pmb{p}$ can be expressed in the form $(1,p_2,p_3)$.
 
   \item $\rho _t$\\
-  stands for the total amount of funds we hold at time $t$.
+  stands for the total amount of funds we hold on day $t$.
   $\rho _t$ is the sum of current cash holdings and the market value of gold and bitcoin.
   According to this definition, $\rho _1$ on day 1 is 1000\$.
 \end{itemize}
@@ -437,15 +437,15 @@ The \textit{state} at time $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made
 \subsubsection{The action and the reward}
 
 \textit{Actions} are what the agent performs.
-What an action $a_t$ does is to effect the state $s_t$ at time $t$
-and change it to state $s_{t+1}$ at time $t+1$,
+What an action $a_t$ does is to effect the state $s_t$ on day $t$
+and change it to state $s_{t+1}$ on day $t+1$,
 producing \textit{rewards} $r_t$ in the process.
 In the case of our RL model,
 $\pmb{p}$ is determined by the actual market data and influenced by actions,
 according to the zero market impact hypothesis.
 Also, $\rho $ is calculated afterwards using previous data.
 Only $\pmb{w}$ is effected directly by actions.
-The way in which actions affect the state is shown in picture[\ref{action}]:
+The way in which actions affect the state is shown in graph[\ref{action}]:
 
 \begin{figure}[h]
   \centering
@@ -470,7 +470,7 @@ The way in which actions affect the state is shown in picture[\ref{action}]:
   \caption{An action of the agent} \label{action}
 \end{figure}
 
-The action done between time $t$ and time $t+1$ changes $\pmb{w}_t$ to $\pmb{w}_{t+1}$,
+The action done between day $t$ and day $t+1$ changes $\pmb{w}_t$ to $\pmb{w}_{t+1}$,
 effecting $\rho $ in the process.
 Total funds $\rho _{t+1}$ is calculated using
 $\rho _t$, $\pmb{w}_t$, $\pmb{w}_{t+1}$, $\pmb{p}_t$ and $\pmb{p}_{t+1}$,
@@ -493,27 +493,66 @@ we introduce a new variable $\pmb{A}_t$:
 
 where $\oslash$ is the element-wise division operator.
 $\pmb{A}_t$ is also a 3-tuple.
-It indicates how many \textit{units} of holdings the agent holds at time $t$,
+It indicates how many \textit{units} of holdings the agent holds on day $t$,
 based on all the elements of the current state:
 total amount of fund $\rho_t$, the allocation of assets $\pmb{w}_t$,
 and the current market price $\pmb{p}_t$.
-We can express the change in holdings in terms of the amount of change in $\pmb{A}$.
+We can express the change in holdings in terms of the amount of change in $\pmb{A}$ ($\Delta \pmb{A}$).
 For one certain asset,
+a positive or negative $\Delta A$ corresponds to the agent buying or selling the asset respectively.
+
+According to the question, a commission must be paid after each transaction is done,
+$1\%$ for gold and $2\%$ for bitcoin.
+A new vector $\pmb{c}$ is introduced to store this information,
+$\pmb{c} = (0, 0.01, 0.02)$.
+
+The formulae used when buying and selling differ when taking $\pmb{C}$ into account.
+For those products that we buy (i.e. $\Delta A > 0$),
+the amount spent on the purchase is greater than the actual value of the purchase,
+which is $c\%$ less than the former.
+The actual amount spent on day $t+1$ can be calculated using equation (\ref{buy-in}).
+
+\begin{equation}
+  \frac{p_{t+1} \cdot \Delta A_{t+1}}{1-c}
+  = \frac{\rho _{t+1} \cdot w_{t+1} - \rho _t \cdot w_t \cdot (p_{t+1} / p_t)}{1-c}
+  \label{buy-in}
+\end{equation}
+
+In the numerator,
+$\rho _{t+1} \cdot w_{t+1}$ is the value on day $t+1$ after the trade,
+and the second part $\rho _t \cdot w_t \cdot (p_{t+1} / p_t)$
+is the value on day $t+1$ before the trade.
+Thus, the difference represents the change in value caused by the transaction on day $t+1$,
+and the expression stands for the amount of funds the agent actually spent
+to cause that change.
+% The numerator, $p_{t+1} \cdot \Delta A_{t+1}$,
+% is the ideal amount spent on the buy-in when there is no commission.
+Similarly, the formula for the asset that we sell (i.e. $\Delta A < 0$) is:
+
+\begin{equation}
+  p_{t+1} \cdot \Delta A_{t+1} \cdot (1 - c)
+  = (\rho _{t+1} \cdot w_{t+1} - \rho _t \cdot w_t \cdot \frac{p_{t+1}}{p_t}) \cdot (1-c).
+\end{equation}
+
+As the total funds are not affected by this transaction which happens immediately,
+given the ``instant trading'' hypothesis,
+the sum of the changes in funding caused by these three products is bound to be zero.
+
 
 \subsection{The Model Results}
 
-\lipsum[8]
+The output of the RL model is shown in the following line chart[\ref{RL-Results}].
 
-\subsection{Validating the Model}
-\lipsum[9]
+
+\begin{figure}[h]
+  \small
+  \centering
+  \includegraphics[width=12cm]{RL-output-new.png}
+  \caption{Reinforcement learning results} \label{RL-Results}
+\end{figure}
 
 \section{Conclusions}
 \lipsum[6]
-
-\section{A Summary}
-\lipsum[6]
-
-\section{Evaluate of the Mode}
 
 \section{Strengths and weaknesses}
 \lipsum[12]
