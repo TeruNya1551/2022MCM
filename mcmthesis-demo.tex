@@ -201,7 +201,6 @@ However, in the actual market, the transaction cost cannot be ignored. When cons
 
 In reality, transaction costs usually come from asset commissions. Institutions such as trading markets will charge tiered pricing fees during transactions. These fees are usually positively related to the market value of assets bought and sold. This natural fee cannot be measured correctly. However, our model makes some simplistic assumptions, assuming that fees are charged as a percentage of the amount traded on the asset, and that the fees for buying and selling are the same.
 
-
 \section{Hypotheses}
 
 \begin{itemize}
@@ -276,6 +275,7 @@ Vector autoregression model is a highly recognized time series analysis model. I
 \subsection{Model building}
 
 Out of all the bitcoin price data, our model is trained on data except the last seven days to get the last seven days of bitcoin price data. Then use these price data to compare with the actual price to judge whether the prediction is reasonable. Before this judgment, the correlation coefficient must be determined. If the correlation coefficient is not high enough, the autoregressive model cannot be solved.
+An workflow of the autoregressive model is shown in figure \ref{AR}.
 
 \begin{itemize}
   \item \textbf{Determine whether the data is stationary}\\
@@ -322,25 +322,23 @@ Out of all the bitcoin price data, our model is trained on data except the last 
 \end{itemize}
 
 \begin{figure}[h]
-
-
-  \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+  \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
   \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
   %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
-  
-  %Straight Lines [id:da8112233976325808] 
+
+  %Straight Lines [id:da8112233976325808]
   \draw    (100,101) -- (544,101) ;
   \draw [shift={(546,101)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-  %Straight Lines [id:da7920278133084296] 
+  %Straight Lines [id:da7920278133084296]
   \draw    (512,65) -- (512,137) ;
-  %Curve Lines [id:da46433491372617774] 
+  %Curve Lines [id:da46433491372617774]
   \draw    (265,124) .. controls (255.1,176.47) and (360.85,241.68) .. (401.78,213.87) ;
   \draw [shift={(403,213)}, rotate = 143.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-  %Curve Lines [id:da102775317135267] 
+  %Curve Lines [id:da102775317135267]
   \draw    (566,208) .. controls (605.8,178.15) and (637.68,116.62) .. (571.01,88.42) ;
   \draw [shift={(570,88)}, rotate = 22.38] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-  
+
   % Text Node
   \draw (519,70) node [anchor=north west][inner sep=0.75pt]   [align=left] {7 days};
   % Text Node
@@ -349,10 +347,11 @@ Out of all the bitcoin price data, our model is trained on data except the last 
   \draw (411,195) node [anchor=north west][inner sep=0.75pt]   [align=left] {Autoregression Model};
   % Text Node
   \draw (551,157) node [anchor=north west][inner sep=0.75pt]   [align=left] {predict};
-  
-  
+
   \end{tikzpicture}
-  
+
+  \caption{Autoregression model}
+  \label{AR}
 \end{figure}
 
 \subsection{The Model Results}
@@ -678,11 +677,25 @@ respectively using Proximal policy optimization(PPO), RNN-LSTM and Autoregressio
 \begin{figure}[h]
   \small
   \centering
-  \includegraphics[width=13cm]{RL-final.jpg}
+  \includegraphics[width=10cm]{RL-final.jpg}
   \caption{Reinforcement learning results} \label{RL-Results}
 \end{figure}
 
-Proximal policy optimization with high risk constraint works the best among all the algorithms.
+Proximal policy optimization with high risk constraint works the best among all the algorithms, with an acceptable amount of risk and high profit. PPO with low risk constraint works well when control of risk is a priority, with smaller but consistently growing returns that are less affected by the price of bitcoin. Both RNN-LSTM and Autoregression model performed relatively poorly, with the former being too risky and the latter too low rewarding.
+
+The actions made the agent in the face of changes in the price of Bitcoin have a significant impact on its outcome.
+Figure \ref{BTC} shows the number of \textit{units} of bitcoin bought by the agent against price changes in bitcoin.
+
+\begin{figure}[h]
+  \small
+  \centering
+  \includegraphics[width=10cm]{bitcoin.png}
+  \caption{Agent behavior against price changes of BTC} \label{BTC}
+\end{figure}
+
+Each point in the figure stands for one actual transaction made by the agent.
+The x-axis represents the average changes in price in the next 15 days.
+The y-axis represents the amount of purchases, with positive and negative values indicating buys and sells respectively.
 
 
 \section{Conclusions}
