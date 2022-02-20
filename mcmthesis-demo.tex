@@ -266,51 +266,6 @@ Vector autoregression model is a highly recognized time series analysis model. I
 
 Out of all the bitcoin price data, our model is trained on data except the last seven days to get the last seven days of bitcoin price data. Then use these price data to compare with the actual price to judge whether the prediction is reasonable. Before this judgment, the correlation coefficient must be determined. If the correlation coefficient is not high enough, the autoregressive model cannot be solved.
 An workflow of the autoregressive model is shown in figure \ref{AR}.
-
-\begin{itemize}
-  \item \textbf{Determine whether the data is stationary}\\
-  The autoregressive model can only be applied to predict economic phenomena related to its own previous period (also known as its data stationary/weak stationary), such as economic phenomena that are greatly affected by its own historical factors, the mining volume of mines, the output of various natural resources etc.For economic phenomena that are greatly affected by social factors, autoregressive models are not suitable. Therefore, before establishing an autoregressive model, we first need to judge whether the subject conditions meet the requirements for establishing an autoregressive model.\\
-  First of all ,formulate the null hypothesis $H_0$ :There is a unit root/UNIT ROOT (that is, the data is not stationary).\\
-  % 存在单位根/UNIT ROOT（即数据不平稳）
-  % 自回归模型只能适用于预测与自身前期相关的经济现象（也称作其数据平稳/弱平稳），例如受到自身历史因素影响较大的经济现象，如矿的开采量，各种自然资源产量等；对于受到社会因素影响较大的经济现象，不宜采用自回归模型。因此，在建立自回归模型之前，我们首先需要判断一下题目条件是否符合自回归模型的建立要求
-  By using \textit{Augmented Dickey-Fuller Test},we can get the following results(three decimal places):\\
-  \begin{table}[H]
-    \centering
-    \begin{tabular}{@{}lr@{}}
-      \toprule
-      Name & Value \\
-      \midrule
-      Statistical values & -0.238 \\
-      P-value & 0.934 \\
-      lags & 24.000 \\
-      nobs & 1801.000 \\
-      Threshold value(1\%) & -3.434 \\
-      Threshold value(5\%) & -2.863 \\
-      Threshold value(10\%) & -2.568 \\
-      \bottomrule
-    \end{tabular}
-  \end{table}
-  In the form:\textit{Statistical values}, \textit{P-value} and \textit{lags} are all statistical values obtained under the AIC standard, and the fisrt parameter is used for comparison with the lower 1\%, 5\%, and 10\% cutoffs.The second parameter represents the probability that the null hypothesis holds.The parameter \textit{nobs} is the number of observations used in this detection. The parameter maxlag in \textit{ADF TEST} is determined by it, and the formula is $ \displaystyle maxlag = 12 \times ( \frac{nobs}{100}) ^\frac{1}{4} $ .
-
-  It can be seen from the \textit{P-value} that the probability of the null hypothesis is extremely low, thus we can reject the null hypothesis $H_0$, and the data is stationary.
-  % 由p值可以看出，原假设成立的概率极底，我们应该拒绝原假设。即数据平稳
-
-  \item \textbf{Quickly see if the data fits the AR model}\\
-  According to the autoregressive function: \[ \hat{y_t} = b_0 + b_1 \times y_{t - 1} + \ldots + b_n \times y_{t - n} \qquad n < t \]
-  We can determine whether $ y_{t + 1}$ and $ y_t $ are clearly related the picture\ref{fig:Figure_2} drawn by the computer.Also, we can calculate that the correlation coefficient is about 0.998 and the significance level is 0.0.
-
-  \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{lag_plot}
-    \caption{Figure2}
-    \label{The lag plot of correlation}
-  \end{figure}
-  \item \textbf{Ignore market impact}\\
-
-  \item \textbf{Instant trading}\\
-
-\end{itemize}
-
 \begin{figure}[h]
   \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
@@ -344,10 +299,67 @@ An workflow of the autoregressive model is shown in figure \ref{AR}.
   \label{AR}
 \end{figure}
 
-\subsection{The Model Results}
+\subsubsection{Determine whether the data is stationary}
+The autoregressive model can only be applied to predict economic phenomena related to its own previous period (also known as its data stationary/weak stationary), such as economic phenomena that are greatly affected by its own historical factors, the mining volume of mines, the output of various natural resources etc.For economic phenomena that are greatly affected by social factors, autoregressive models are not suitable. Therefore, before establishing an autoregressive model, we first need to judge whether the subject conditions meet the requirements for establishing an autoregressive model.\\
+First of all ,formulate the null hypothesis $H_0$ :There is a unit root/UNIT ROOT (that is, the data is not stationary).\\
+% 存在单位根/UNIT ROOT（即数据不平稳）
+% 自回归模型只能适用于预测与自身前期相关的经济现象（也称作其数据平稳/弱平稳），例如受到自身历史因素影响较大的经济现象，如矿的开采量，各种自然资源产量等；对于受到社会因素影响较大的经济现象，不宜采用自回归模型。因此，在建立自回归模型之前，我们首先需要判断一下题目条件是否符合自回归模型的建立要求
+  By using \textit{Augmented Dickey-Fuller Test},we can get the following results(three decimal places):\\
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      Name & Value \\
+      \midrule
+      Statistical values & -0.238 \\
+      P-value & 0.934 \\
+      lags & 24.000 \\
+      nobs & 1801.000 \\
+      Threshold value(1\%) & -3.434 \\
+      Threshold value(5\%) & -2.863 \\
+      Threshold value(10\%) & -2.568 \\
+      \bottomrule
+    \end{tabular}
+    \caption{ADF test result}
+  \end{table}
+  In the form:\textit{Statistical values}, \textit{P-value} and \textit{lags} are all statistical values obtained under the AIC standard, and the fisrt parameter is used for comparison with the lower 1\%, 5\%, and 10\% cutoffs.The second parameter represents the probability that the null hypothesis holds.The parameter \textit{nobs} is the number of observations used in this detection. The parameter maxlag in \textit{ADF TEST} is determined by it, and the formula is $ \displaystyle maxlag = 12 \times ( \frac{nobs}{100}) ^\frac{1}{4} $ .
 
+  It can be seen from the \textit{P-value} that the probability of the null hypothesis is extremely low, thus we can reject the null hypothesis $H_0$, and the data is stationary.
+  % 由p值可以看出，原假设成立的概率极底，我们应该拒绝原假设。即数据平稳
 
+\subsubsection{Quickly see if the data fits the AR model}
+  According to the autoregressive function: \[ \hat{y_t} = b_0 + b_1 \times y_{t - 1} + \ldots + b_n \times y_{t - n} \qquad n < t \]
+  We can determine whether $ y_{t + 1}$ and $ y_t $ are clearly related the figure\ref{fig:lag_plot} drawn by the computer.Also, we can calculate that the correlation coefficient is about 0.998 and the significance level is 0.0.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{lag_plot}
+    \caption{The lag plot of correlation}
+    \label{fig:lag_plot}
+  \end{figure}
+
+  When we judge the correlation of $ y_t$ and $ y_{t - 1} \ldots y_{t - n} $ at the same time, we use command function \textit{statsmodels.graphics.tsaplots.plot\_acf()} to plot the autoregressive coefficients of n multiple Lags at a time,as shown in the figure \ref{fig:correlation}.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{correlation}
+    \caption{Multiple autoregressive coefficients}
+    \label{fig:correlation}
+  \end{figure}
+
+\subsubsection{Build the training model}
+We use the data except the last seven days to train our model and compare the predicted data for the last seven days with the real data provided in the table, and get the picture\ref{fig:prediction}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{model_result}
+  \caption{Comparison of predicted results}
+  \label{fig:prediction}
+\end{figure}
 \subsection{Model summary}
+However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from an autoregressive model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also,
+if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.
+
 
 
 
