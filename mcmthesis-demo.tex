@@ -479,7 +479,7 @@ by the algorithm to be described in the next part.
 Finally, the reward $r$ is used to show the growth rate of the total funds $\rho$:
 
 \begin{equation}
-  r = log(\frac{\rho _{t+1}}{\rho _t} ).
+  r_{t+1} = log(\frac{\rho _{t+1}}{\rho _t} ).
 \end{equation}
 
 \subsubsection{The algorithm}
@@ -537,12 +537,30 @@ Similarly, the formula for the asset that we sell (i.e. $\Delta A < 0$) is:
 As the total funds are not affected by this transaction which happens immediately,
 given the ``instant trading'' hypothesis,
 the sum of the changes in funding caused by these three products is bound to be zero.
+Using this method we get an equation with only one unknown $\rho _{t+1}$,
+therefore calculating it.
 
+To maximize the final amount of funds,
+previously defined $r$ is used.
+The sum of all the rewards in one period of time is
+
+% \begin{equation}
+%   \sum_{t=1}^t r_t = log(\frac{p_2}{p_1}) + log(\frac{p_3}{p_2}) + \cdots + log(\frac{p_t}{p_{t-1}})
+% \end{equation}
+
+\begin{align}
+  \sum_{t=1}^t r_t &= log(\frac{\rho_2}{\rho_1}) + log(\frac{\rho_3}{\rho_2}) + \cdots + log(\frac{\rho_t}{\rho_{t-1}}) \notag \\
+  &= log(\frac{\rho_2 \rho_3 \cdots \rho_t}{\rho_1 \rho_2 \cdots \rho_{t-1}}) = log(\frac{\rho_t}{\rho_1}),
+\end{align}
+
+providing a intuitive representation of the ratio of $\rho_t$ and $\rho_1$.
+The agent uses $\Sigma r_t$ to value current actions and make self-adjustment
+in the reinforcement learning process.
+The learning stops when new actions no longer provide significant improvement in $\Sigma r_t$.
 
 \subsection{The Model Results}
 
 The output of the RL model is shown in the following line chart[\ref{RL-Results}].
-
 
 \begin{figure}[h]
   \small
