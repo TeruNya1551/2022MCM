@@ -264,7 +264,7 @@ Vector autoregression model is a highly recognized time series analysis model. I
 
 \subsection{Model building}
 
-Out of all the bitcoin price data, our model is trained on data except the last seven days to get the last seven days of bitcoin price data. Then use these price data to compare with the actual price to judge whether the prediction is reasonable. Before this judgment, the correlation coefficient must be determined. If the correlation coefficient is not high enough, the autoregressive model cannot be solved.
+We use the bitcoin price data to train our model, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable. Before this judgment, the correlation coefficient must be determined. If the correlation coefficient is not high enough, the autoregressive model cannot be solved.
 An workflow of the autoregressive model is shown in figure \ref{AR}.
 \begin{figure}[h]
   \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
