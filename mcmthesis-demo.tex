@@ -71,7 +71,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx} %插入图片的宏包
 \usepackage{float} %设置图片浮动位置的宏包
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}  
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
 \title{Portfolio Arrangement}
 \author{\small \href{https://www.latexstudio.net/}
@@ -99,16 +99,6 @@ keyword1; keyword2
 Generate the Table of Contents, if it's needed.
 \tableofcontents
 \newpage
-
-Generate the Memorandum, if it's needed.
-\memoto{\LaTeX{}studio}
-\memofrom{Liam Huang}
-\memosubject{Happy \TeX{}ing!}
-\memodate{\today}
-\begin{memo}[Memorandum]
-  \lipsum[1-3]
-\end{memo}
-
 
 \section{Introduction}
 \subsection{Background of the problem}
@@ -698,7 +688,7 @@ Figure \ref{BTC} shows the number of \textit{units} of bitcoin bought by the age
 \begin{figure}[h]
   \small
   \centering
-  \includegraphics[width=10cm]{bitcoin.png}
+  \includegraphics[width=10cm]{linear.png}
   \caption{Agent behavior against price changes of BTC} \label{BTC}
 \end{figure}
 
@@ -762,6 +752,16 @@ human resources for the airline. \item \textbf{}
 \begin{center}
 \bibliography{reference} %调出LaTeX生成参考文献列表
 \end{center}
+
+\newpage
+% Generate the Memorandum, if it's needed.
+\memoto{\LaTeX{}studio}
+\memofrom{Liam Huang}
+\memosubject{Happy \TeX{}ing!}
+\memodate{\today}
+\begin{memo}[Memorandum]
+  \lipsum[1-3]
+\end{memo}
 
 \begin{appendices}
 
