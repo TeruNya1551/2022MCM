@@ -367,10 +367,7 @@ We use the data except the last seven days to train our model and compare the pr
   \label{fig:prediction}
 \end{figure}
 \subsection{Model summary}
-However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from an autoregressive model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, 
-if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.
-
-
+However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from an autoregressive model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems.
  
 
 \section{Reinforcement learning model}
