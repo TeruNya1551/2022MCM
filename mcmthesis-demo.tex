@@ -261,7 +261,13 @@ and predict how much it will become five years later, based on the formerly deve
 
 \subsection{Introduction}
 
-It is a general approach to make regressing from past price dates and forecasting a period price. Then design an algorithm to make a plan for rearranging the ratio of assets. These methods can be classified as ``two-staged methods''.
+% It is a general approach to make regressing from past price dates and forecasting a period price. Then design an algorithm to make a plan for rearranging the ratio of assets. These methods can be classified as ``two-staged methods''.
+The workflow of a two-staged method can be roughly summarized into two steps:
+
+\begin{itemize}
+  \item Make regressing from past price dates and forecasting a period price;
+  \item Design an algorithm to make a plan for rearranging the ratio of assets.
+\end{itemize}
 
 In the prediction stage, there are mainly two methods in the industry, namely Vector Autoregression (VAR) and LSTM.
 
@@ -390,12 +396,12 @@ We use the data except the last seven days to train our model and compare the pr
 
 Two-stage models typically rely on accurate predictions in the first stage, while planning in the second stage is relatively less important and primitive. This leads directly to the fact that two-stage models are often "short-sighted" and they cannot make long-term plans based on long-term growth.
 
-However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from any two-staged model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks. 
+However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from any two-staged model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks.
 
 % 我们的工作将使用这些two-staged方法作为对照实验，评估我们更优化的模型的performance。
 
 Our work will use these two-staged methods as control experiments to evaluate the performance of our more optimized models.
- 
+
 
 \section{Reinforcement learning model}
 
@@ -554,11 +560,11 @@ by the current and historical price of gold and bitcoin.
 The \textit{agent} is the reinforcement learning algorithm which
 continuously trades in the environment.
 
-The \textit{state} on day $t$, $s_t = (\epsilon , \pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of four parts:
+The \textit{state} on day $t$, $s_t = (RP_t , \pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of four parts:
 
 \begin{itemize}
-  \item $\epsilon$ \\
-  is the risk parameter.
+  \item $RP_t$ \\
+  is the \textit{risk premium}.
   It is used to determine whether a transaction occurs or not.
   Further explanation will be given in part \ref{risk-constraint}.
 
@@ -579,7 +585,7 @@ The \textit{state} on day $t$, $s_t = (\epsilon , \pmb{w}_t, \pmb{p}_t, \rho _t)
   \item $\pmb{\rho} _t$\\
   stands for the total amount of funds we hold on day $t$.
   $\rho _t$ is the sum of current cash holdings and the market value of gold and bitcoin.
-  According to this definition, $\rho _1$ on day 1 is 1000\$.
+  According to this definition, $\rho _1$ on day 1 is 1,000\$.
 \end{itemize}
 
 \subsubsection{The action and the reward}
@@ -708,9 +714,30 @@ The learning stops when new actions no longer provide significant improvement in
 
 \subsubsection{Risk Constraint \label{risk-constraint}}
 
-% 风险约束是决定交易发生与否的重要方式。如前文所定义，风险系数episilon代表了一次交易
+% 风险约束是决定交易发生与否的重要方式。如前文所定义，市场风险溢价RP代表了一次交易在有风险的情况下多获得的收益（相比于无风险的情况而言）。更大的RP通常意味着更多的收益，同时也会带来更大的风险（It provides a quantitative measure of the extra return demanded by market participants for the increased risk.）。RP的数学公式：
 
-\lipsum[45]
+Risk constraint is an important way of deciding whether a transaction occurs or not.
+As we have mentioned before, the \textit{market risk premium} shows the extra expected return on a market portfolio than on the risk-free rate \cite{duarte2015equity}.
+It provides a quantitative measure of the extra return demanded by market participants for the increased risk.
+The formula for RP is
+
+\begin{equation}
+  PR = E(r_m) - r_f,
+\end{equation}
+
+where $E(r_m)$ stands for the expected return rate on a market portfolio, and $r_f$ is the return rate on a risk-free rate.
+$E(r_m)$ is obtained from the actual market performance, or in our model,
+from the algorithm outputs.
+
+% 通过人为为PR设置一个界限的方法，可以改变agent的策略。这个界限代表着交易与否的分界。当PR小于该界限时允许进行交易，而PR大于该界限时不允许进行交易，这样来进一步达到提高收入与降低风险这两个目标。而针对它们优先级的不同，可以为PR设置不同的界限：当提高收入更为重要时，界限设置得较大，允许agent进行风险较高的交易；当降低风险更为重要时，界限设置的较小，以回避可能带来的不确定性。
+
+The agent's strategy can be changed by artificially setting a cut-off for $PR$,
+which indicates the boundary between a transaction occuring and the opposite.
+Transactions are allowed when the PR is less than this cut-off and not allowed when the PR is greater than it, thus furthering the twin objectives of maximizing the profit and minimizing the risk.
+Different cut-offs can be set for PR depending on their priority: when maximizing profit is more important, the cut-off is set higher to allow agent to undertake riskier transactions; when reducing risk is more important, the cut-off is set lower to avoid the uncertainty that may arise.
+
+% 同时，更新w的算法得到进一步简化。当交易不被允许时，w(t+1)直接继承w(t)即可。
+% 这个好像没必要说，和这一部分关系不大
 
 \subsection{The Model Results}
 
