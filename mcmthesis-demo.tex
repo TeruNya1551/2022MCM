@@ -200,7 +200,7 @@ and predict how much it will become five years later, based on the formerly deve
   and during holidays such as Christmas day and the days around.
   We assume such vacancies occur on and only on gold market closure days.
   In this case, gold cannot be traded and the gold price won't change.\\
-  This does not apply for bitcoin market, which does not have closure days.
+  This does not apply for the bitcoin market, which does not have closure days.
   \item \textbf{Trade at the end of the day}\\
   Price changes during the trading hours each day are not taken into consideration
   as there is no relevant data.
@@ -208,7 +208,7 @@ and predict how much it will become five years later, based on the formerly deve
   (i.e. the price at the end of the trading hours),
   and our trade is made at that market closing time ideally.
   \item \textbf{Transaction Costs}\\
-  Transaction cost isa factor that cannot be ignored. If frequent transactions are done in a short period of time, the overall profit will be greatly affected due to the existence of the transaction cost.\\
+  Transaction cost is a factor that cannot be ignored. If frequent transactions are done in a short period of time, the overall profit will be greatly affected due to the existence of the transaction cost.\\
   In actual markets, transaction costs usually come from asset commissions. Institutions such as trading markets will charge tiered pricing fees during transactions. These fees are usually positively related to the market value of assets bought and sold. This natural fee cannot be measured correctly. However, our model makes some simplistic assumptions, assuming that fees are charged as a percentage of the amount traded on the asset, and that the fees for buying and selling are the same.
   \item \textbf{Ignore market impact}\\
   The amount of funds we put into the market is very little
@@ -428,7 +428,7 @@ Inside each node, the data from the previous node is calculated in a non-linear 
 and passed on to the next node.
 
 The 'deep' in deep learning refers to the use of multiple layers in ANN.
-Nodes in NAA are divided into several layers,
+Nodes in ANN are divided into several layers,
 and different layers might perform different transformations on the input data.
 The very first layer is called the input layer and,
 accordingly, the last layer is referred to as the output layer.
@@ -437,7 +437,7 @@ Those layers between the first and the last layer are called \textit{hidden} lay
 Deep learning can be divided into three categories.
 The learning is rather supervised, semi-supervised, or unsupervised.
 Every neuron and edge has a \textit{weight} that can be adjusted in the learning process.
-Given sample \textit{observations}, NAA adjusts the weight of the nodes and edges,
+Given sample \textit{observations}, ANN adjusts the weight of the nodes and edges,
 trying to improve the accuracy of the output.
 This process is done by lowering the observed error rate.
 In this case, learning won't stop until
@@ -464,7 +464,7 @@ It's kinda like a game, where players take their actions and get a relevant awar
 Players will continuously change their actions to maximize their rewards.
 
 A reinforcement learning model works just like that,
-but there is no game guides it can refer to --
+but there are no game guides it can refer to --
 all given to the model is some ``in-game data''.
 Reinforcement learning does not require a large quantity of data to feed,
 as supervised learning and unsupervised learning do.
@@ -491,7 +491,7 @@ In one word, Markov property refers to the memoryless property of a process, or
 
 A stochastic and continuous decision-making process with Markov property
 is called a Markov decision process.
-A MDP can be described as a 4-tuple:
+An MDP can be described as a 4-tuple:
 
 \begin{equation}
 (\pmb{S},\pmb{A},\pmb{P},\pmb{R})
@@ -552,10 +552,15 @@ by the current and historical price of gold and bitcoin.
 The \textit{agent} is the reinforcement learning algorithm which
 continuously trades in the environment.
 
-The \textit{state} on day $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of three parts:
+The \textit{state} on day $t$, $s_t = (\epsilon , \pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of four parts:
 
 \begin{itemize}
-  \item $\pmb{w}_t = (w_1, w_2, w_3)$, or the weight vector \\is a 3-tuple.
+  \item $\epsilon$ \\
+  is the risk parameter.
+  It is used to determine whether a transaction occurs or not.
+  Further explanation will be given in part \ref{risk-constraint}.
+
+  \item $\pmb{w}_t = (w_1, w_2, w_3)$, or the weight vector \\ is a 3-tuple.
   It describes the allocation of three types of assets.
   The three elements in $\pmb{w}$ stands for the percentage of cash, gold and bitcoin respectively,
   and it's clear that the sum of these percentages ($w_1+w_2+w_3$) is equal to 1.\\
@@ -584,7 +589,7 @@ producing \textit{rewards} $r_t$ in the process.
 In the case of our RL model,
 $\pmb{p}$ is determined by the actual market data and influenced by actions,
 according to the zero market impact hypothesis.
-Also, $\rho $ is calculated afterwards using previous data.
+Also, $\rho $ and $\epsilon$ are calculated afterwards using previous data.
 Only $\pmb{w}$ is effected directly by actions.
 The way in which actions affect the state is shown in graph[\ref{action}]:
 
@@ -635,7 +640,7 @@ we introduce a new variable $\pmb{A}_t$:
 where $\oslash$ is the element-wise division operator.
 $\pmb{A}_t$ is also a 3-tuple.
 It indicates how many \textit{units} of holdings the agent holds on day $t$,
-based on all the elements of the current state:
+based on the current state:
 total amount of fund $\rho_t$, the allocation of assets $\pmb{w}_t$,
 and the current market price $\pmb{p}_t$.
 We can express the change in holdings in terms of the amount of change in $\pmb{A}$ ($\Delta \pmb{A}$).
@@ -699,7 +704,9 @@ The agent uses $\Sigma r_t$ to value current actions and make self-adjustment
 in the reinforcement learning process.
 The learning stops when new actions no longer provide significant improvement in $\Sigma r_t$.
 
-\subsubsection{Risk Constraint}
+\subsubsection{Risk Constraint \label{risk-constraint}}
+
+% 风险约束是决定交易发生与否的重要方式。如前文所定义，风险系数episilon代表了一次交易
 
 \lipsum[45]
 
@@ -741,10 +748,10 @@ And finally, the value of the initial \$1,000 is shown in table \ref{final-value
     \toprule
     Algorithm & Final value(\$) \\
     \midrule
-    Proximal policy optimization (high risk) & 112,630 \\
+    Proximal policy optimization (high-risk) & 112,630 \\
     {\color{gray} All in bitcoin} & {\color{gray} 76,120} \\
     RNN-LSTM & 55,350 \\
-    Proximal policy optimization (low risk) & 21,450 \\
+    Proximal policy optimization (low-risk) & 21,450 \\
     AR-based DP & 8,040 \\
     \bottomrule
   \end{tabular}
