@@ -65,6 +65,14 @@
 % \usepackage{newtxtext}%\usepackage{palatino}
 \usepackage{tikz}
 \usepackage{lipsum}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{graphicx} %插入图片的宏包
+\usepackage{float} %设置图片浮动位置的宏包
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  
+\renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
 \title{Portfolio Arrangement}
 \author{\small \href{https://www.latexstudio.net/}
   {\includegraphics[width=7cm]{mcmthesis-logo}}}
@@ -260,7 +268,7 @@ In reality, transaction costs usually come from asset commissions. Institutions 
 \section{Vector autoregression model}
 
 \subsection{Introduction to the model}
-Is a general approach regressing from past price dates and forecasting a period price. Then design an algorithm to make a plan for rearranging the ratio of assets. These methods can be classified as ``two-staged methods''.
+It is a general approach to make regressing from past price dates and forecasting a period price. Then design an algorithm to make a plan for rearranging the ratio of assets. These methods can be classified as ``two-staged methods''.
 
 Vector autoregression model is a highly recognized time series analysis model. In previous research, vector autoregression model has been widely used in investment management, quantitative trading and so on. These models usually model the existing data, and then select the last piece of data for prediction and comparison as a reference. The autoregressive model has been shown to have very good interpolation accuracy and can also accurately predict the development trend in the next few days in terms of prediction.
 
@@ -268,6 +276,50 @@ Vector autoregression model is a highly recognized time series analysis model. I
 \subsection{Model building}
 
 Out of all the bitcoin price data, our model is trained on data except the last seven days to get the last seven days of bitcoin price data. Then use these price data to compare with the actual price to judge whether the prediction is reasonable. Before this judgment, the correlation coefficient must be determined. If the correlation coefficient is not high enough, the autoregressive model cannot be solved.
+
+\begin{itemize}
+  \item \textbf{Determine whether the data is stationary}\\
+  The autoregressive model can only be applied to predict economic phenomena related to its own previous period (also known as its data stationary/weak stationary), such as economic phenomena that are greatly affected by its own historical factors, the mining volume of mines, the output of various natural resources etc.For economic phenomena that are greatly affected by social factors, autoregressive models are not suitable. Therefore, before establishing an autoregressive model, we first need to judge whether the subject conditions meet the requirements for establishing an autoregressive model.\\
+  First of all ,formulate the null hypothesis $H_0$ :There is a unit root/UNIT ROOT (that is, the data is not stationary).\\
+  % 存在单位根/UNIT ROOT（即数据不平稳）
+  % 自回归模型只能适用于预测与自身前期相关的经济现象（也称作其数据平稳/弱平稳），例如受到自身历史因素影响较大的经济现象，如矿的开采量，各种自然资源产量等；对于受到社会因素影响较大的经济现象，不宜采用自回归模型。因此，在建立自回归模型之前，我们首先需要判断一下题目条件是否符合自回归模型的建立要求
+  By using \textit{Augmented Dickey-Fuller Test},we can get the following results(three decimal places):\\
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      Name & Value \\
+      \midrule
+      Statistical values & -0.238 \\
+      P-value & 0.934 \\
+      lags & 24.000 \\
+      nobs & 1801.000 \\
+      Threshold value(1\%) & -3.434 \\
+      Threshold value(5\%) & -2.863 \\
+      Threshold value(10\%) & -2.568 \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+  In the form:\textit{Statistical values}, \textit{P-value} and \textit{lags} are all statistical values obtained under the AIC standard, and the fisrt parameter is used for comparison with the lower 1\%, 5\%, and 10\% cutoffs.The second parameter represents the probability that the null hypothesis holds.The parameter \textit{nobs} is the number of observations used in this detection. The parameter maxlag in \textit{ADF TEST} is determined by it, and the formula is $ \displaystyle maxlag = 12 \times ( \frac{nobs}{100}) ^\frac{1}{4} $ .
+
+  It can be seen from the \textit{P-value} that the probability of the null hypothesis is extremely low, thus we can reject the null hypothesis $H_0$, and the data is stationary.
+  % 由p值可以看出，原假设成立的概率极底，我们应该拒绝原假设。即数据平稳
+
+  \item \textbf{Quickly see if the data fits the AR model}\\
+  According to the autoregressive function: \[ \hat{y_t} = b_0 + b_1 \times y_{t - 1} + \ldots + b_n \times y_{t - n} \qquad n < t \]
+  We can determine whether $ y_{t + 1}$ and $ y_t $ are clearly related the picture\ref{fig:Figure_2} drawn by the computer.Also, we can calculate that the correlation coefficient is about 0.998 and the significance level is 0.0.
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{lag_plot}
+    \caption{Figure2}
+    \label{The lag plot of correlation}
+  \end{figure}
+  \item \textbf{Ignore market impact}\\
+ 
+  \item \textbf{Instant trading}\\
+  
+\end{itemize}
 
 \begin{figure}[h]
 
@@ -305,11 +357,10 @@ Out of all the bitcoin price data, our model is trained on data except the last 
 
 \subsection{The Model Results}
 
-\lipsum[8]
 
 \subsection{Model summary}
 
-\lipsum[40]
+
 
 \section{Reinforcement learning model}
 
