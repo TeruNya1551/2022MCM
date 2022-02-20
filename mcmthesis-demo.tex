@@ -378,8 +378,17 @@ We use the data except the last seven days to train our model and compare the pr
   \label{fig:prediction}
 \end{figure}
 \subsection{Model summary}
-However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from an autoregressive model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks.
 
+% 两阶段的模型通常依赖于在第一阶段准确的预测，而第二阶段的规划则相对不那么重要且原始。这直接导致两阶段模型通常较为“短视”他们不能根据长期增长情况作出长远规划。
+
+Two-stage models typically rely on accurate predictions in the first stage, while planning in the second stage is relatively less important and primitive. This leads directly to the fact that two-stage models are often "short-sighted" and they cannot make long-term plans based on long-term growth.
+
+However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from any two-staged model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks. 
+
+% 我们的工作将使用这些two-staged方法作为对照实验，评估我们更优化的模型的performance。
+
+Our work will use these two-staged methods as control experiments to evaluate the performance of our more optimized models.
+ 
 
 \section{Reinforcement learning model}
 
