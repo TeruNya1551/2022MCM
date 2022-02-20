@@ -257,12 +257,17 @@ and predict how much it will become five years later, based on the formerly deve
 %   \right)!}}} \eqno (1)
 % \]
 
-\section{Vector autoregression model}
+\section{The two-staged methods}
 
-\subsection{Introduction to the model}
+\subsection{Introduction}
+
 It is a general approach to make regressing from past price dates and forecasting a period price. Then design an algorithm to make a plan for rearranging the ratio of assets. These methods can be classified as ``two-staged methods''.
 
-Vector autoregression model is a highly recognized time series analysis model. In previous research, vector autoregression model has been widely used in investment management, quantitative trading and so on. These models usually model the existing data, and then select the last piece of data for prediction and comparison as a reference. The autoregressive model has been shown to have very good interpolation accuracy and can also accurately predict the development trend in the next few days in terms of prediction.
+The first method, named Vector autoregression model, is a highly recognized time series analysis model. In previous research, vector autoregression model has been widely used in investment management, quantitative trading and so on. These models usually model the existing data, and then select the last piece of data for prediction and comparison as a reference. The autoregressive model has been shown to have very good interpolation accuracy and can also accurately predict the development trend in the next few days in terms of prediction.
+
+As for the second method, we try to use the recurrent neural network method to train the processed data. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the long short-term memory network to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network. The RNN-LSTM model is very common and its code is open source.Thus, we built the network and predicted the data through the open source deep learning library (the curve is shown in the figure).
+
+In this subsection, we will focus on the process of building an autoregressive model.
 
 
 \subsection{Model building}
