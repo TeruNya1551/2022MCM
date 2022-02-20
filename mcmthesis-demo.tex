@@ -135,7 +135,7 @@ which can be roughly classified into these four categories\cite{li2014online}:
 There're many algorithms that combine these methods with machine learning.
 These algorithms are reliable in short-term prediction
 but do not behave well in long-term prediction.
-This is because the algorithm highly depends on accuracy,
+This is because the algorithms highly depends on their accuracy,
 but the natural uncertainty of the market makes it hard to predict.
 
 \subsection{Restatement of the problem}
@@ -507,23 +507,37 @@ A new vector $\pmb{c}$ is introduced to store this information,
 $\pmb{c} = (0, 0.01, 0.02)$.
 
 The formulae used when buying and selling differ when taking $\pmb{C}$ into account.
-For those products that we buy,
+For those products that we buy (i.e. $\Delta A > 0$),
 the amount spent on the purchase is greater than the actual value of the purchase,
 which is $c\%$ less than the former.
-The actual amount spent on day $t+1$ can be calculated using equation \ref{buy-in}:
+The actual amount spent on day $t+1$ can be calculated using equation (\ref{buy-in}).
 
 \begin{equation}
   \frac{p_{t+1} \cdot \Delta A_{t+1}}{1-c}
+  = \frac{\rho _{t+1} \cdot w_{t+1} - \rho _t \cdot w_t \cdot (p_{t+1} / p_t)}{1-c}
   \label{buy-in}
 \end{equation}
 
-The numerator, $p_{t+1} \cdot \Delta A_{t+1}$,
-is the ideal amount spent on the buy-in when there is no commission.
-Similarly, the formula for the asset that we sell is:
+In the numerator,
+$\rho _{t+1} \cdot w_{t+1}$ is the value on day $t+1$ after the trade,
+and the second part $\rho _t \cdot w_t \cdot (p_{t+1} / p_t)$
+is the value on day $t+1$ before the trade.
+Thus, the difference represents the change in value caused by the transaction on day $t+1$,
+and the expression stands for the amount of funds the agent actually spent
+to cause that change.
+% The numerator, $p_{t+1} \cdot \Delta A_{t+1}$,
+% is the ideal amount spent on the buy-in when there is no commission.
+Similarly, the formula for the asset that we sell (i.e. $\Delta A < 0$) is:
 
 \begin{equation}
-  p_{t+1} \cdot \Delta A_{t+1} \cdot (1 - c).
+  p_{t+1} \cdot \Delta A_{t+1} \cdot (1 - c)
+  = (\rho _{t+1} \cdot w_{t+1} - \rho _t \cdot w_t \cdot \frac{p_{t+1}}{p_t}) \cdot (1-c).
 \end{equation}
+
+As the total funds are not affected by this transaction which happens immediately,
+given the ``instant trading'' hypothesis,
+the sum of the changes in funding caused by these three products is bound to be zero.
+
 
 \subsection{The Model Results}
 
