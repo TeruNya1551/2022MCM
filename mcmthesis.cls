@@ -5,16 +5,16 @@
 %% The original source files were:
 %%
 %% mcmthesis.dtx  (with options: `class')
-%% 
+%%
 %% -----------------------------------
-%% 
+%%
 %% This is a generated file.
-%% 
+%%
 %% Copyright (C)
 %%       2010 -- 2015 by Zhaoli Wang
 %%       2014 -- 2019 by Liam Huang
 %%       2019 -- present by latexstudio.net
-%% 
+%%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
 %% of this license or (at your option) any later version.
@@ -22,11 +22,11 @@
 %%   http://www.latex-project.org/lppl.txt
 %% and version 1.3 or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
-%% 
+%%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% The Current Maintainer of this work is latexstudio.net.
-%% 
+%%
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{mcmthesis}
   [2021/01/05 v6.3.1 The Thesis Template Designed For MCM/ICM]
@@ -336,7 +336,7 @@
 }
 \lstloadlanguages{C,C++,Java,Matlab,Mathematica,python}
 \endinput
-%% 
+%%
 %% This work consists of these files mcmthesis.dtx,
 %%                                   figures/ and
 %%                                   code/,

@@ -96,7 +96,6 @@ keyword1; keyword2
 \end{abstract}
 \maketitle
 
-Generate the Table of Contents, if it's needed.
 \tableofcontents
 \newpage
 
@@ -127,14 +126,13 @@ which can be roughly classified into these four categories\cite{li2014online}:
   transfer the fund from \textit{winner} asset to \textit{loser} asset
   \item \textbf{Pattern Matching}\\
   predict future market distribution based on historical data
-  \item \textbf{Meta-Learning}\\
-  tbd
+  \item \textbf{Meta-Learning}
 \end{itemize}
 
 There're many algorithms that combine these methods with machine learning.
 These algorithms are reliable in short-term prediction
 but do not behave well in long-term prediction.
-This is because the algorithms highly depends on their accuracy,
+This is because the algorithms highly depend on their accuracy,
 but the natural uncertainty of the market makes it hard to predict.
 
 \subsection{Restatement of the problem}
@@ -180,6 +178,8 @@ and predict how much it will become five years later, based on the formerly deve
 % \lipsum[7]
 
 \section{Analysis of the Problem}
+
+
 
 % \subsection{Transaction Costs}
 
@@ -298,40 +298,50 @@ An workflow of the autoregressive model is shown in figure \ref{AR}.
 
   \end{tikzpicture}
 
-  \caption{Autoregression model}
+  \caption{A workflow of the autoregression model}
   \label{AR}
 \end{figure}
 
 \subsubsection{Determine whether the data is stationary}
-The autoregressive model can only be applied to predict economic phenomena related to its own previous period (also known as its data stationary/weak stationary), such as economic phenomena that are greatly affected by its own historical factors, the mining volume of mines, the output of various natural resources etc.For economic phenomena that are greatly affected by social factors, autoregressive models are not suitable. Therefore, before establishing an autoregressive model, we first need to judge whether the subject conditions meet the requirements for establishing an autoregressive model.\\
-First of all ,formulate the null hypothesis $H_0$ :
+The autoregressive model can only be applied to predict economic phenomena related to its own previous period (also known as its data stationary/weak stationary), such as economic phenomena that are greatly affected by its own historical factors, the mining volume of mines, the output of various natural resources etc.For economic phenomena that are greatly affected by social factors, autoregressive models are not suitable. Therefore, before establishing an autoregressive model, we first need to judge whether the subject conditions meet the requirements for establishing an autoregressive model.
+
+First of all, formulate the null hypothesis $H_0$ :
 \[
  H_0 : \mbox{Here is a unit root/UNIT ROOT}
 \]
 % 存在单位根/UNIT ROOT（即数据不平稳）
 % 自回归模型只能适用于预测与自身前期相关的经济现象（也称作其数据平稳/弱平稳），例如受到自身历史因素影响较大的经济现象，如矿的开采量，各种自然资源产量等；对于受到社会因素影响较大的经济现象，不宜采用自回归模型。因此，在建立自回归模型之前，我们首先需要判断一下题目条件是否符合自回归模型的建立要求
-Now to do hypothesis testing. In existing statistics we can do it with \textit{Augmented Dickey-Fuller Test}(ADF test),which is always used to identify whether there is a single root in the sample data of individual variables in time series analysis. By using ADF test,we can get the following results(three decimal places):\\
-  \begin{table}[H]
-    \centering
-    \begin{tabular}{@{}lr@{}}
-      \toprule
-      Name & Value \\
-      \midrule
-      Statistical values & -0.238 \\
-      P-value & 0.934 \\
-      lags & 24.000 \\
-      nobs & 1801.000 \\
-      Threshold value(1\%) & -3.434 \\
-      Threshold value(5\%) & -2.863 \\
-      Threshold value(10\%) & -2.568 \\
-      \bottomrule
-    \end{tabular}
-    \caption{ADF test result}
-  \end{table}
-  In the form:\textit{Statistical values}, \textit{P-value} and \textit{lags} are all statistical values obtained under the AIC standard, and the first parameter is used for comparison with the lower 1\%, 5\%, and 10\% cutoffs.The second parameter represents the probability that the null hypothesis holds.The parameter \textit{nobs} is the number of observations used in this detection. The parameter maxlag in \textit{ADF TEST} is determined by it, and the formula is $ \displaystyle maxlag = 12 \times ( \frac{nobs}{100}) ^\frac{1}{4} $ .
 
-  It can be seen from the \textit{P-value} that the probability of the null hypothesis is extremely low, thus we can reject the null hypothesis $H_0$, and the data is stationary.
-  % 由p值可以看出，原假设成立的概率极底，我们应该拒绝原假设。即数据平稳
+The next step is to do hypothesis testing.
+In existing statistics we can do it with \textit{Augmented Dickey-Fuller Test}(ADF test), which is always used to identify whether there is a single root in the sample data of individual variables in time series analysis.
+By using ADF test, we can get the following results(three decimal places):
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    Name & Value \\
+    \midrule
+    Statistical values & -0.238 \\
+    P-value & 0.934 \\
+    lags & 24.000 \\
+    nobs & 1801.000 \\
+    Threshold value(1\%) & -3.434 \\
+    Threshold value(5\%) & -2.863 \\
+    Threshold value(10\%) & -2.568 \\
+    \bottomrule
+  \end{tabular}
+  \caption{ADF test result}
+\end{table}
+
+
+In the form, \textit{Statistical values}, \textit{P-value} and \textit{lags} are all statistical values obtained under the AIC standard, and the first parameter is used for comparison with the lower 1\%, 5\%, and 10\% cutoffs.
+The second parameter represents the probability that the null hypothesis holds.
+The parameter \textit{nobs} is the number of observations used in this detection.
+The parameter maxlag in \textit{ADF TEST} is determined by it, and the formula is $ \displaystyle maxlag = 12 \times ( \frac{nobs}{100}) ^\frac{1}{4} $ .
+
+It can be seen from the \textit{P-value} that the probability of the null hypothesis is extremely low, thus we can reject the null hypothesis $H_0$, and the data is stationary.
+% 由p值可以看出，原假设成立的概率极底，我们应该拒绝原假设。即数据平稳
 
 \subsubsection{Quickly see if the data fits the AR model}
   According to the autoregressive function:
@@ -537,7 +547,7 @@ The \textit{state} on day $t$, $s_t = (\pmb{w}_t, \pmb{p}_t, \rho _t)$, is made 
   and it's clear that the sum of these percentages ($w_1+w_2+w_3$) is equal to 1.\\
   All our assets were held in cash at the very beginning,
   which means that regardless of the actions afterwards,
-  $\pmb{w}$ is a $(1,0,0)$ at this special time.
+  $\pmb{w}$ is a $(1,0,0)$.
 
   \item $\pmb{p}_t = (p_1, p_2, p_3)$, or the price vector \\ is also a 3-tuple,
   which represents current prices of the assets.
@@ -707,12 +717,11 @@ Each point in the figure stands for one actual transaction made by the agent.
 The x-axis represents the average changes in price in the next 15 days.
 The y-axis represents the amount of purchases, with positive and negative values indicating buys and sells respectively.
 When the agent believes that there will be a significant change in the price of Bitcoin, it will change its holdings accordingly.
-As can be seen from the figure, the purchase volume and change in price can be approximately fitted into a linear relationship.
-That is to say, amount of purchases are positively correlated with predicted price changes.
+As can be seen from the figure, the purchase volume and change in price can be approximately fitted into a positive correlation relationship.
 
 And finally, the value of the initial \$1,000 is shown in table \ref{final-value}:
 
-\begin{table}
+\begin{table}[H]
   \centering
   \begin{tabular}{@{}lr@{}}
     \toprule
@@ -731,7 +740,7 @@ And finally, the value of the initial \$1,000 is shown in table \ref{final-value
 
 \subsection{Transactions cost sensitivity}
 
-As mentioned in the hypothesis section, transaction cost highly effect the decision-making process and the final result of the algorithm.
+As mentioned in the hypothesis section, transaction cost highly affects the decision-making process and the final result of the algorithm.
 A higher transaction cost means more losses with equal transaction amounts,
 leading to negative rewards given to the agent.
 The agent will try to lower these losses, by the means of decreasing total transaction amount.
@@ -784,9 +793,10 @@ human resources for the airline. \item \textbf{}
 
 \newpage
 % Generate the Memorandum, if it's needed.
-\memoto{\LaTeX{}studio}
-\memofrom{Liam Huang}
-\memosubject{Happy \TeX{}ing!}
+\addcontentsline{toc}{section}{Memorandum}
+\memoto{Trader}
+\memofrom{MCM team 2207690}
+\memosubject{A automated trade decision model for BTC and gold}
 \memodate{\today}
 \begin{memo}[Memorandum]
   \lipsum[1-3]
