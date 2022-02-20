@@ -633,7 +633,7 @@ respectively using Proximal policy optimization(PPO), RNN-LSTM and Autoregressio
 Proximal policy optimization with high risk constraint works the best among all the algorithms, with an acceptable amount of risk and high profit. PPO with low risk constraint works well when control of risk is a priority, with smaller but consistently growing returns that are less affected by the price of bitcoin. Both RNN-LSTM and Autoregression model performed relatively poorly, with the former being too risky and the latter too low rewarding.
 
 The actions made the agent in the face of changes in the price of Bitcoin have a significant impact on its outcome.
-Figure \ref{BTC} shows the number of \textit{units} of bitcoin bought by the agent against price changes in bitcoin.
+Figure \ref{BTC} shows the number of \textit{units} of bitcoin bought by the agent against price changes in bitcoin with the PPO algorithm.
 
 \begin{figure}[h]
   \small
@@ -645,7 +645,28 @@ Figure \ref{BTC} shows the number of \textit{units} of bitcoin bought by the age
 Each point in the figure stands for one actual transaction made by the agent.
 The x-axis represents the average changes in price in the next 15 days.
 The y-axis represents the amount of purchases, with positive and negative values indicating buys and sells respectively.
+When the agent believes that there will be a significant change in the price of Bitcoin, it will change its holdings accordingly.
+As can be seen from the figure, the purchase volume and change in price can be approximately fitted into a linear relationship.
+That is to say, amount of purchases are positively correlated with predicted price changes.
 
+And finally, the value of the initial \$1000 is shown in table \ref{final-value}:
+
+\begin{table}
+  \centering
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    Algorithm & Final value(\$) \\
+    \midrule
+    Proximal policy optimization (high risk) & 112 \\
+    {\color{gray} All in bitcoin} & {\color{gray} 76} \\
+    RNN-LSTM & 55 \\
+    Proximal policy optimization (low risk) & 21 \\
+    AR-based DP & 8 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Final value of funds}
+  \label{final-value}
+\end{table}
 
 \section{Conclusions}
 \lipsum[6]
@@ -719,12 +740,17 @@ When you need to insert a table, use this template.
 \centering
 \begin{tabular}{@{}lr@{}}
   \toprule
-  class1 & class2 \\
+  Algorithm & Final value(\$) \\
   \midrule
-  item1.1 & item2.1 \\
-  item1.2 & item2.2 \\
+  Proximal policy optimization (high risk) & 112 \\
+  {\color{gray} All in bitcoin} & {\color{gray} 76} \\
+  RNN-LSTM & 55 \\
+  Proximal policy optimization (low risk) & 21 \\
+  AR-based DP & 8 \\
   \bottomrule
 \end{tabular}
+\caption{Final value of funds}
+\label{final-value123}
 \end{table}
 
 \end{appendices}
