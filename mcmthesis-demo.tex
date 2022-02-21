@@ -288,9 +288,9 @@ The workflow of a two-stage method can be roughly summarized into two steps:
 
 In the prediction stage, there are mainly two methods in the industry, namely Vector Autoregression (VAR) and LSTM.
 
-The first method, vector autoregression model, is a highly recognized time series analysis model. In previous research, vector autoregression model has been widely used in investment management, quantitative trading and so on. These models usually model the existing data, and then select the last piece of data for prediction and comparison as a reference. The autoregressive model has been shown to have very good interpolation accuracy and can also accurately predict the development trend in the next few days in terms of prediction.
+The first method, \textit{vector autoregression model}, is a highly recognized time series analysis model\cite{stock2001vector}. In previous research, vector autoregression model has been widely used in investment management, quantitative trading and so on. These models usually model the existing data, and then select the last piece of data for prediction and comparison as a reference. The autoregressive model has been shown to have very good interpolation accuracy and can also accurately predict the development trend in the next few days in terms of prediction.
 
-As for the second method, we try to use the recurrent neural network method to train the processed data. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the long short-term memory network to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network. The RNN-LSTM model is very common and its code is open source. Thus, we built the network and predicted the data through the open source deep learning library.
+As for the second method, we try to use the \textit{recurrent neural network} method to train the processed data\cite{khedmati2020time}. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the \textit{long short-term memory network} to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network\cite{sherstinsky2020fundamentals} \cite{fang2019research}. The RNN-LSTM model is very common and its code is open source. Thus, we built the network and predicted the data through the open source deep learning library.
 
 We use the bitcoin price data to train our models, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable.
 The prediction results of the autoregressive model will be shown in figure \ref{fig:prediction} together with the prediction results of the RNN-TLSM model and the workflow of the prediction model is shown in figure \ref{AR}.
@@ -652,7 +652,7 @@ An MDP can be described as a 4-tuple:
 \end{itemize}
 
 These elements make the foundation of MDPs.
-A simplified MDP is shown in diagram \ref{MDP}.
+A simplified workflow of MDP is shown in diagram \ref{MDP}.
 
 \begin{figure}[h]
   \small
@@ -726,7 +726,7 @@ which contains all the data needed.
 Here the environment can be simply described
 by the current and historical price of gold and bitcoin.
 The \textit{agent} is the reinforcement learning algorithm which
-continuously trades in the environment.
+continuously trades in the environment\cite{filos2019reinforcement}.
 
 The \textit{state} on day $t$, $s_t = (RP_t , \pmb{w}_t, \pmb{p}_t, \rho _t)$, is made up of four parts:
 
@@ -1132,6 +1132,8 @@ It can also be used to forecast and plan the distribution of other types of asse
 % \bibitem{3}\url{https://www.latexstudio.net/}
 % \end{thebibliography}
 
+\newpage
+\addcontentsline{toc}{section}{References}
 \bibliographystyle{unsrt} %规定了参考文献的格式
 \begin{center}
 \bibliography{reference} %调出LaTeX生成参考文献列表
@@ -1176,25 +1178,25 @@ To deploy the model into the actual trading scenario, you only need to provide t
   \centering
 
 
-\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
 %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
 
-%Rounded Rect [id:dp5484913935078426] 
+%Rounded Rect [id:dp5484913935078426]
 \draw   (226,105.6) .. controls (226,99.19) and (231.19,94) .. (237.6,94) -- (332.4,94) .. controls (338.81,94) and (344,99.19) .. (344,105.6) -- (344,140.4) .. controls (344,146.81) and (338.81,152) .. (332.4,152) -- (237.6,152) .. controls (231.19,152) and (226,146.81) .. (226,140.4) -- cycle ;
-%Shape: Can [id:dp6641307988702282] 
+%Shape: Can [id:dp6641307988702282]
 \draw   (163,97.25) -- (163,163.75) .. controls (163,171.62) and (130.09,178) .. (89.5,178) .. controls (48.91,178) and (16,171.62) .. (16,163.75) -- (16,97.25) .. controls (16,89.38) and (48.91,83) .. (89.5,83) .. controls (130.09,83) and (163,89.38) .. (163,97.25) .. controls (163,105.12) and (130.09,111.5) .. (89.5,111.5) .. controls (48.91,111.5) and (16,105.12) .. (16,97.25) ;
-%Straight Lines [id:da7463116442214988] 
+%Straight Lines [id:da7463116442214988]
 \draw    (166,130) -- (220.01,124.21) ;
 \draw [shift={(222,124)}, rotate = 173.88] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Curve Lines [id:da25976188936195854] 
+%Curve Lines [id:da25976188936195854]
 \draw    (345,124) .. controls (388.56,121.03) and (383.12,208.23) .. (438.31,203.18) ;
 \draw [shift={(440,203)}, rotate = 173] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Curve Lines [id:da12696529228531028] 
+%Curve Lines [id:da12696529228531028]
 \draw    (500,189) .. controls (520,156) and (426,-19) .. (290,92) ;
 \draw [shift={(290,92)}, rotate = 320.78] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Curve Lines [id:da46719166688600944] 
+%Curve Lines [id:da46719166688600944]
 \draw    (393,175) .. controls (439.53,237.37) and (437.05,231.13) .. (490.37,243.62) ;
 \draw [shift={(492,244)}, rotate = 193.3] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
 
