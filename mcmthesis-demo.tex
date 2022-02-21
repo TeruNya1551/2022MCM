@@ -273,15 +273,10 @@ In the prediction stage, there are mainly two methods in the industry, namely Ve
 
 The first method, vector autoregression model, is a highly recognized time series analysis model. In previous research, vector autoregression model has been widely used in investment management, quantitative trading and so on. These models usually model the existing data, and then select the last piece of data for prediction and comparison as a reference. The autoregressive model has been shown to have very good interpolation accuracy and can also accurately predict the development trend in the next few days in terms of prediction.
 
-As for the second method, we try to use the recurrent neural network method to train the processed data. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the long short-term memory network to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network. The RNN-LSTM model is very common and its code is open source. Thus, we built the network and predicted the data through the open source deep learning library (the curve is shown in the figure).
+As for the second method, we try to use the recurrent neural network method to train the processed data. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the long short-term memory network to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network. The RNN-LSTM model is very common and its code is open source. Thus, we built the network and predicted the data through the open source deep learning library. 
 
-In this subsection, we will focus on the process of building an autoregressive model.
+We use the bitcoin price data to train our models, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable.(The prediction results of the autoregressive model will be shown in figure\ref{fig:prediction} together with the prediction results of the RNN-TLSM model and the workflow of the prediction model is shown in figure \ref{AR}.).
 
-
-\subsection{Model building}
-
-We use the bitcoin price data to train our model, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable. Before this judgment, the correlation coefficient must be determined. If the correlation coefficient is not high enough, the autoregressive model cannot be solved.
-An workflow of the autoregressive model is shown in figure \ref{AR}.
 \begin{figure}[h]
   \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
@@ -305,15 +300,22 @@ An workflow of the autoregressive model is shown in figure \ref{AR}.
   % Text Node
   \draw (245,74) node [anchor=north west][inner sep=0.75pt]   [align=left] {Training data};
   % Text Node
-  \draw (411,195) node [anchor=north west][inner sep=0.75pt]   [align=left] {Autoregression Model};
+  \draw (411,195) node [anchor=north west][inner sep=0.75pt]   [align=left] {Prediction Model};
   % Text Node
   \draw (551,157) node [anchor=north west][inner sep=0.75pt]   [align=left] {predict};
 
   \end{tikzpicture}
 
-  \caption{A workflow of the autoregression model}
+  \caption{A workflow of the prediction model}
   \label{AR}
 \end{figure}
+
+In the next subsection, we will focus on the process of building an autoregressive model.
+
+
+\subsection{Establishment of the autoregressive model}
+
+Before we start building the autoregressive model, the correlation coefficient must be determined. If the correlation coefficient is not high enough, the autoregressive model cannot be solved.
 
 \subsubsection{Determine whether the data is stationary}
 The autoregressive model can only be applied to predict economic phenomena related to its own previous period (also known as its data stationary/weak stationary), such as economic phenomena that are greatly affected by its own historical factors, the mining volume of mines, the output of various natural resources etc.For economic phenomena that are greatly affected by social factors, autoregressive models are not suitable. Therefore, before establishing an autoregressive model, we first need to judge whether the subject conditions meet the requirements for establishing an autoregressive model.
@@ -386,7 +388,7 @@ We use the data except the last seven days to train our model and compare the pr
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{model_result}
+  \includegraphics[width=0.5\textwidth]{3_result}
   \caption{Comparison of predicted results}
   \label{fig:prediction}
 \end{figure}
@@ -394,7 +396,7 @@ We use the data except the last seven days to train our model and compare the pr
 
 % 两阶段的模型通常依赖于在第一阶段准确的预测，而第二阶段的规划则相对不那么重要且原始。这直接导致两阶段模型通常较为“短视”他们不能根据长期增长情况作出长远规划。
 
-Two-stage models typically rely on accurate predictions in the first stage, while planning in the second stage is relatively less important and primitive. This leads directly to the fact that two-stage models are often "short-sighted" and they cannot make long-term plans based on long-term growth.
+Two-stage models typically rely on accurate predictions in the first stage, while planning in the second stage is relatively less important and primitive. In addition, both models have a certain lag in time, and this leads directly to the fact that two-stage models are often "short-sighted". Thus, they cannot make long-term plans based on long-term growth.
 
 However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from any two-staged model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks.
 
@@ -582,7 +584,7 @@ The \textit{state} on day $t$, $s_t = (RP_t , \pmb{w}_t, \pmb{p}_t, \rho _t)$, i
   The "price" of cash is bound to be 1,
   so $\pmb{p}$ can be expressed in the form $(1,p_2,p_3)$.
 
-  \item $\pmb{\rho} _t$\\
+  \item $\rho_t$\\
   stands for the total amount of funds we hold on day $t$.
   $\rho _t$ is the sum of current cash holdings and the market value of gold and bitcoin.
   According to this definition, $\rho _1$ on day 1 is 1,000\$.
