@@ -346,7 +346,7 @@ The next step is to do hypothesis testing.
 In existing statistics we can do it with \textit{Augmented Dickey-Fuller Test}(ADF test), which is always used to identify whether there is a single root in the sample data of individual variables in time series analysis.
 By using ADF test, we can get the following results(three decimal places):
 
-\begin{table}[H]
+\begin{table}[h]
   \centering
   \begin{tabular}{@{}lr@{}}
     \toprule
@@ -382,7 +382,7 @@ It can be seen from the \textit{P-value} that the probability of the null hypoth
 
   We can determine whether $ y_{t + 1}$ and $ y_t $ are clearly related from figure \ref{fig:lag_plot}. Also, we can calculate that the correlation coefficient is 0.998 and the significance level is 0.0, approximately.
 
-  \begin{figure}[H]
+  \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{lag_plot}
     \caption{The lag plot of correlation}
@@ -391,7 +391,7 @@ It can be seen from the \textit{P-value} that the probability of the null hypoth
 
   When we judge the correlation of $ y_t$ and $ y_{t - 1} \ldots y_{t - n} $ at the same time, we plot the autoregressive coefficients of n multiple lags at a time, as shown in the figure \ref{fig:correlation}.
 
-  \begin{figure}[H]
+  \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{correlation}
     \caption{Multiple autoregressive coefficients}
@@ -399,9 +399,9 @@ It can be seen from the \textit{P-value} that the probability of the null hypoth
   \end{figure}
 
 \subsubsection{Build the training model}
-We use the data except the last seven days to train our model and compare the predicted data for the last seven days with the real data provided in the table, and get the picture\ref{fig:prediction}.
+We use the data except the last seven days to train our model and compare the predicted data for the last seven days with the real data provided in the table, and the results are shown in figure \ref{fig:prediction}.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.5\textwidth]{3_result}
   \caption{Comparison of predicted results}
@@ -779,7 +779,7 @@ We introduce a new symbol $\varrho$ to represent the total market capitalization
 
 First, we deduct the market value of gold from total assets to get $\varrho_{t}$. Then ignore the proportion of gold assets output by the model, and only use the two items of bitcoin and cash in the model. Convert the model to an investment allocation model with only two asset types, and then calculate the asset ratio $\pmb{w}_{t+1}$ and $\varrho_{t+1}$ according to the original algorithm. This workflow can be seen in figure \ref{fig:no_gold}.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
 
 
@@ -847,7 +847,7 @@ In reinforcement learning concepts, observation is the cognitive term for a neur
 
 The reason for entering $\pmb{w}$ into the model is because a good agent should know what proportion of assets it has at a given moment. If the agent wants to learn to change the number of transactions according to the change of transaction cost, that is, to become transaction prudent, he must learn what output $\pmb{w}$ is ``no transaction'', enter $\pmb{w}$ can make the model converge faster.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
  %set default line width to 0.75pt
 \scalebox{0.9}[0.9]{
@@ -941,7 +941,7 @@ As can be seen from the figure, the purchase volume and change in price can be a
 
 And finally, the value of the initial \$1,000 is shown in table \ref{final-value}:
 
-\begin{table}[H]
+\begin{table}[h]
   \centering
   \begin{tabular}{@{}lr@{}}
     \toprule
