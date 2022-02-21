@@ -724,19 +724,19 @@ It provides a quantitative measure of the extra return demanded by market partic
 The formula for RP is
 
 \begin{equation}
-  PR = E(r_m) - r_f,
+  RP = E(r_m) - r_f,
 \end{equation}
 
 where $E(r_m)$ stands for the expected return rate on a market portfolio, and $r_f$ is the return rate on a risk-free rate.
 $E(r_m)$ is obtained from the actual market performance, or in our model,
 from the algorithm outputs.
 
-% 通过人为为PR设置一个界限的方法，可以改变agent的策略。这个界限代表着交易与否的分界。当PR小于该界限时允许进行交易，而PR大于该界限时不允许进行交易，这样来进一步达到提高收入与降低风险这两个目标。而针对它们优先级的不同，可以为PR设置不同的界限：当提高收入更为重要时，界限设置得较大，允许agent进行风险较高的交易；当降低风险更为重要时，界限设置的较小，以回避可能带来的不确定性。
+% 通过人为为RP设置一个界限的方法，可以改变agent的策略。这个界限代表着交易与否的分界。当RP小于该界限时允许进行交易，而RP大于该界限时不允许进行交易，这样来进一步达到提高收入与降低风险这两个目标。而针对它们优先级的不同，可以为RP设置不同的界限：当提高收入更为重要时，界限设置得较大，允许agent进行风险较高的交易；当降低风险更为重要时，界限设置的较小，以回避可能带来的不确定性。
 
-The agent's strategy can be changed by artificially setting a cut-off for $PR$,
+The agent's strategy can be changed by artificially setting a cut-off for $RP$,
 which indicates the boundary between a transaction occuring and the opposite.
-Transactions are allowed when the PR is less than this cut-off and not allowed when the PR is greater than it, thus furthering the twin objectives of maximizing the profit and minimizing the risk.
-Different cut-offs can be set for PR depending on their priority: when maximizing profit is more important, the cut-off is set higher to allow agent to undertake riskier transactions; when reducing risk is more important, the cut-off is set lower to avoid the uncertainty that may arise.
+Transactions are allowed when the RP is less than this cut-off and not allowed when the RP is greater than it, thus furthering the twin objectives of maximizing the profit and minimizing the risk.
+Different cut-offs can be set for RP depending on their priority: when maximizing profit is more important, the cut-off is set higher to allow agent to undertake riskier transactions; when reducing risk is more important, the cut-off is set lower to avoid the uncertainty that may arise.
 
 % 同时，更新w的算法得到进一步简化。当交易不被允许时，w(t+1)直接继承w(t)即可。
 % 这个好像没必要说，和这一部分关系不大
