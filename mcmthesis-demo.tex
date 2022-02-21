@@ -751,6 +751,78 @@ The agent uses $\Sigma r_t$ to value current actions and make self-adjustment
 in the reinforcement learning process.
 The learning stops when new actions no longer provide significant improvement in $\Sigma r_t$.
 
+\noindent \textbf{Special treatment for gold market closed days} \par
+In the algorithm mentioned above, we did not consider the situation when the gold market is closed. However, since the gold market is closed every weekend, and there are also closed days near Christmas every year, these untradeable time periods cannot be ignored and must be reflected in the environment. 
+
+Our model assumes that the missing data in the gold price data in this question means it impossible to trade gold.
+
+We introduce a new symbol $\varrho$ to represent the total market capitalization of two other assets besides gold.
+
+\[
+  \varrho = \rho - \pmb{w}_{\mathrm{cash, bitcoin}} \cdot \pmb{p}_{\mathrm{cash, bitcoin}}
+\]
+
+
+First, we deduct the market value of gold from total assets to get $\varrho_{t}$. Then ignore the proportion of gold assets output by the model, and only use the two items of bitcoin and cash in the model. Convert the model to an investment allocation model with only two asset types, and then calculate the asset ratio $\pmb{w}_{t+1}$ and $\varrho_{t+1}$ according to the original algorithm. This workflow can be seen in figure \ref{fig:no_gold}.
+
+\begin{figure}[H]
+  \centering
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Rounded Rect [id:dp8834591968202742] 
+\draw   (100,133.4) .. controls (100,123.79) and (107.79,116) .. (117.4,116) -- (356.6,116) .. controls (366.21,116) and (374,123.79) .. (374,133.4) -- (374,185.6) .. controls (374,195.21) and (366.21,203) .. (356.6,203) -- (117.4,203) .. controls (107.79,203) and (100,195.21) .. (100,185.6) -- cycle ;
+%Straight Lines [id:da7362281283591992] 
+\draw    (97,96) -- (397,220) ;
+%Curve Lines [id:da160010014065319] 
+\draw    (264,122) .. controls (303.6,92.3) and (331.44,69.46) .. (381.48,72.89) ;
+\draw [shift={(383,73)}, rotate = 184.48] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7831526497431593] 
+\draw    (184,27) -- (225,27) ;
+\draw [shift={(227,27)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da06593268260339469] 
+\draw    (253,36) .. controls (269.83,58.77) and (308.22,96.24) .. (353.62,69.82) ;
+\draw [shift={(355,69)}, rotate = 148.67] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da8174394958071393] 
+\draw    (456,76) .. controls (499.34,75.02) and (512.6,149.71) .. (491.01,177.75) ;
+\draw [shift={(490,179)}, rotate = 310.43] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da327303584584819] 
+\draw    (205,194) .. controls (204.01,272.61) and (408.94,200.73) .. (380.45,265.02) ;
+\draw [shift={(380,266)}, rotate = 295.16] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da9374685353653947] 
+\draw    (449,213) .. controls (433.4,227.63) and (402.59,243.2) .. (390.86,266.21) ;
+\draw [shift={(390,268)}, rotate = 294.62] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (129,171) node [anchor=north west][inner sep=0.75pt]   [align=left] {market value of gold};
+% Text Node
+\draw (245,132) node [anchor=north west][inner sep=0.75pt]   [align=left] {other assets};
+% Text Node
+\draw (395,64.4) node [anchor=north west][inner sep=0.75pt]    {$\varrho _{t} ,\pmb{w}_{t}$};
+% Text Node
+\draw (129,18) node [anchor=north west][inner sep=0.75pt]   [align=left] {Agent};
+% Text Node
+\draw (240,15.4) node [anchor=north west][inner sep=0.75pt]    {$\pmb{w}_{t + 1}$};
+% Text Node
+\draw (446,182.4) node [anchor=north west][inner sep=0.75pt]    {$\pmb{w}_{t+1} , \varrho _{t+1}$};
+% Text Node
+\draw (177,4) node [anchor=north west][inner sep=0.75pt]   [align=left] {Action};
+% Text Node
+\draw (229,74) node [anchor=north west][inner sep=0.75pt]   [align=left] {As input};
+% Text Node
+\draw (380,229.4) node [anchor=north west][inner sep=0.75pt]    {$\oplus $};
+% Text Node
+\draw (370,267.4) node [anchor=north west][inner sep=0.75pt]    {$\pmb{w}_{t+1}, \rho_{t+1} $};
+
+\end{tikzpicture}
+\caption{No gold trade workflow}
+\label{fig:no_gold}
+\end{figure}
+
 \subsubsection{The observation}
 
 % 在强化学习概念中，observation是神经网络对环境的认知术语。在我们的模型中，我们将observation设定为标准化的前$n$天价格矩阵，以及目前拥有的资产分布情况，即$\pmb{w}$
