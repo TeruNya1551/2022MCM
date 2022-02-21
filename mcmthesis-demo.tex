@@ -733,6 +733,40 @@ In reinforcement learning concepts, observation is the cognitive term for a neur
 
 The reason for entering $\pmb{w}$ into the model is because a good agent should know what proportion of assets it has at a given moment. If the agent wants to learn to change the number of transactions according to the change of transaction cost, that is, to become transaction prudent, he must learn what output $\pmb{w}$ is ``no transaction'', enter $\pmb{w}$ can make the model converge faster.
 
+\begin{figure}[H]
+\centering
+ %set default line width to 0.75pt        
+\scalebox{0.6}[0.6]{
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+  %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+  
+  %Shape: Cube [id:dp0031259884345929967] 
+  \draw   (391,124.4) -- (435.4,80) -- (556,80) -- (556,183.6) -- (511.6,228) -- (391,228) -- cycle ; \draw   (556,80) -- (511.6,124.4) -- (391,124.4) ; \draw   (511.6,124.4) -- (511.6,228) ;
+  %Shape: Grid [id:dp3629674359367516] 
+  \draw  [draw opacity=0] (86,67) -- (207,67) -- (207,188) -- (86,188) -- cycle ; \draw   (86,67) -- (86,188)(106,67) -- (106,188)(126,67) -- (126,188)(146,67) -- (146,188)(166,67) -- (166,188)(186,67) -- (186,188)(206,67) -- (206,188) ; \draw   (86,67) -- (207,67)(86,87) -- (207,87)(86,107) -- (207,107)(86,127) -- (207,127)(86,147) -- (207,147)(86,167) -- (207,167)(86,187) -- (207,187) ; \draw    ;
+  %Curve Lines [id:da9295803655851189] 
+  \draw    (206,127) .. controls (245.6,97.3) and (344.99,202.85) .. (385.78,175.86) ;
+  \draw [shift={(387,175)}, rotate = 143.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+  %Curve Lines [id:da9533332638936705] 
+  \draw    (176,257) .. controls (216,227) and (260,123) .. (334,172) ;
+  
+  % Text Node
+  \draw (405,36) node [anchor=north west][inner sep=0.75pt]   [align=left] {The Observation};
+  % Text Node
+  \draw (66,22) node [anchor=north west][inner sep=0.75pt]   [align=left] {Normalized Price Data};
+  % Text Node
+  \draw (130,261.4) node [anchor=north west][inner sep=0.75pt]    {$\pmb{w}_{t-n}, \pmb{w}_{t-n+1}, \cdots, \pmb{w}_t$};
+  % Text Node
+  \draw (254,142.4) node [anchor=north west][inner sep=0.75pt]    {$\otimes $};
+  % Text Node
+  \draw (28,73) node [anchor=north west][inner sep=0.75pt]   [align=left] {BTC\\\\Gold\\\\Cash};
+  
+  
+  \end{tikzpicture}
+}
+\caption{The building process of observation arrays}
+\end{figure}
+
 
 \subsubsection{Risk Constraint \label{risk-constraint}}
 
