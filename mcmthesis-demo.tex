@@ -991,24 +991,21 @@ As for the transaction cost sensitivity, our agent significantly reduces its num
 \subsection{Strengths}
 \begin{itemize}
 \item \textbf{Controlable risk constraint}\\
-This  system can be used for many types of airplanes, and it also
-solves the interference during  the procedure of the boarding
-airplane,as described above we can get to the  optimization
-boarding time.We also know that all the service is automate.
+By setting different cut-offs for the risk premium, we can artificially adjust the behaviour of agents and thus the relationship between return and risk. This incorporates the idea of supervised-learning into reinforcement learning and makes our model applicable to market traders with different objectives.
 \item \textbf{End-to-end learning and planning}\\
-Balancing the cost of the cost and the benefit, it will bring in
-more convenient  for airport and passengers.It also saves many
-human resources for the airline.
-\item \textbf{Widely appliable}\\
-\lipsum[3]
+The end-to-end PPO algorithm is more accurate than the multi-staged algorithm, considering the fact that it combines multiple steps and eliminates the effects between them.
+\item \textbf{Appliable for different assets}\\
+This model does not only apply for the transactions of bitcoin and gold.
+It can also be used to forecast and plan the distribution of other types of assets such as stocks and shares.
 \end{itemize}
 
 \subsection{Weaknesses}
 \begin{itemize}
-  \item \textbf{1}\\
-  \lipsum[12]
-  \item \textbf{2}\\
-  \lipsum[3]
+  \item \textbf{Relatively long learning process}\\
+  The end-to-end PPO algorithm consumes more resources and takes longer compared to two-staged methods.
+  In our case, the model took one hour to train to get better results, while two-staged models tend to converge quickly.
+  \item \textbf{Reliance on substantial historical data}\\
+  The PPO algorithm relies more on historical data than some of the other algorithms such as VAR. This means that it does not perform well in cases where there is less historical data.
 \end{itemize}
 
 % \begin{thebibliography}{99}
@@ -1030,7 +1027,7 @@ human resources for the airline.
 \addcontentsline{toc}{section}{Memorandum}
 \memoto{Trader}
 \memofrom{MCM team 2207690}
-\memosubject{A automated trade decision model for BTC and gold}
+\memosubject{An automated trade decision-making model for Bitcoin and gold}
 \memodate{\today}
 \begin{memo}[Memorandum]
   \lipsum[1-3]
