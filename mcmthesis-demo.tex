@@ -418,14 +418,17 @@ trying to improve the algorithm accuracy.
 
 \subsubsection{One-staged methods}
 
-
+Compared to multi-staged methods, a one-staged method directly arrange its actions from the past data, skipping the processes between the input and the output\cite{lecun2004autonomous}.
+In a multi-staged method, a task is solved in multiple steps, where the input to each step is the output of the previous step.
+This can cause accumulation of inaccuracy which may be exponential as the number of steps increases in the worst case.
+One-staged methods eliminate the influence between different steps and reduces the complexity of the algorithm.
 
 \subsubsection{Deep learning}
 
 Deep learning is part of machine learning and also part of artificial intelligence,
 based on artificial neural networks, or ANN.
 ANN is inspired by the biological neural network
-and shares a similar structure with it, as diagram[\ref{ANN}] shows:
+and shares a similar structure with it, as diagram \ref{ANN} shows:
 
 \begin{figure}[h]
 \small
@@ -461,7 +464,7 @@ extra observations don't efficiently reduce the error rate.
 \subsubsection{Reinforcement learning}
 
  Reinforcement learning is a field of deep learning.
-Diagram[\ref{LA}] shows the basic elements of reinforcement learning:
+Diagram \ref{LA} shows the basic elements of reinforcement learning:
 
 \begin{figure}[h]
   \small
@@ -520,7 +523,7 @@ An MDP can be described as a 4-tuple:
 \end{itemize}
 
 These elements make the foundation of MDPs.
-A simplified MDP is shown in diagram[\ref{MDP}].
+A simplified MDP is shown in diagram \ref{MDP}.
 
 \begin{figure}[h]
   \small
@@ -761,7 +764,7 @@ The reason for entering $\pmb{w}$ into the model is because a good agent should 
 \begin{figure}[H]
 \centering
  %set default line width to 0.75pt
-\scalebox{0.6}[0.6]{
+\scalebox{0.9}[0.9]{
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
   %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
 
