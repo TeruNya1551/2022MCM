@@ -95,7 +95,7 @@ Portfolio management is the process of managing investments,
 constantly rearranging a certain amount of funds into several products or assets,
 aiming at maximizing profit and ensuring minimizing risks at the same time.
 
-This article presents an portfolio management model based on end-to-end reinforcement learning, using the proximal policy optimization(PPO).
+This article presents a portfolio management model based on end-to-end reinforcement learning, using the proximal policy optimization(PPO).
 Also, other multi-staged methods are used as a comparison, including RNN-LSTM (i.e. Recurrent Neural Network with Long Short-Term Memory) and the vector autoregressive model.
 
 The article proposes a method to control trading risk artificially, introducing the market risk premium.
@@ -766,7 +766,7 @@ in the reinforcement learning process.
 The learning stops when new actions no longer provide significant improvement in $\Sigma r_t$.
 
 \noindent \textbf{Special treatment for gold market closed days} \par
-In the algorithm mentioned above, we did not consider the situation when the gold market is closed. However, since the gold market is closed every weekend, and there are also closed days near Christmas every year, these untradeable time periods cannot be ignored and must be reflected in the environment. 
+In the algorithm mentioned above, we did not consider the situation when the gold market is closed. However, since the gold market is closed every weekend, and there are also closed days near Christmas every year, these untradeable time periods cannot be ignored and must be reflected in the environment.
 
 Our model assumes that the missing data in the gold price data in this question means it impossible to trade gold.
 
@@ -783,31 +783,31 @@ First, we deduct the market value of gold from total assets to get $\varrho_{t}$
   \centering
 
 
-\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
 
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
 %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
 
-%Rounded Rect [id:dp8834591968202742] 
+%Rounded Rect [id:dp8834591968202742]
 \draw   (100,133.4) .. controls (100,123.79) and (107.79,116) .. (117.4,116) -- (356.6,116) .. controls (366.21,116) and (374,123.79) .. (374,133.4) -- (374,185.6) .. controls (374,195.21) and (366.21,203) .. (356.6,203) -- (117.4,203) .. controls (107.79,203) and (100,195.21) .. (100,185.6) -- cycle ;
-%Straight Lines [id:da7362281283591992] 
+%Straight Lines [id:da7362281283591992]
 \draw    (97,96) -- (397,220) ;
-%Curve Lines [id:da160010014065319] 
+%Curve Lines [id:da160010014065319]
 \draw    (264,122) .. controls (303.6,92.3) and (331.44,69.46) .. (381.48,72.89) ;
 \draw [shift={(383,73)}, rotate = 184.48] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Straight Lines [id:da7831526497431593] 
+%Straight Lines [id:da7831526497431593]
 \draw    (184,27) -- (225,27) ;
 \draw [shift={(227,27)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Curve Lines [id:da06593268260339469] 
+%Curve Lines [id:da06593268260339469]
 \draw    (253,36) .. controls (269.83,58.77) and (308.22,96.24) .. (353.62,69.82) ;
 \draw [shift={(355,69)}, rotate = 148.67] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Curve Lines [id:da8174394958071393] 
+%Curve Lines [id:da8174394958071393]
 \draw    (456,76) .. controls (499.34,75.02) and (512.6,149.71) .. (491.01,177.75) ;
 \draw [shift={(490,179)}, rotate = 310.43] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Curve Lines [id:da327303584584819] 
+%Curve Lines [id:da327303584584819]
 \draw    (205,194) .. controls (204.01,272.61) and (408.94,200.73) .. (380.45,265.02) ;
 \draw [shift={(380,266)}, rotate = 295.16] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-%Curve Lines [id:da9374685353653947] 
+%Curve Lines [id:da9374685353653947]
 \draw    (449,213) .. controls (433.4,227.63) and (402.59,243.2) .. (390.86,266.21) ;
 \draw [shift={(390,268)}, rotate = 294.62] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
 
@@ -977,25 +977,39 @@ With the percentage of transaction cost increasing, the agent significantly redu
 \end{figure}
 
 \section{Conclusions}
-\lipsum[6]
+
+This paper presents a automatic portfolio management model.
+Among all the algorithms used in the article, the method of reinforcement learning with the proximal policy optimization works the best.
+The agent's strategy in PPO changes for different risk constraints.
+With a relatively high risk constraint, the agent performs a high-risk strategy and raises total assets to 112 times, in the 5-year trading period.
+With a low risk constraint, the agent gained 21 times of return. Although lower, the returns of the latter are more stable and have largely been on an upward trend over the five-year period.
+
+As for the transaction cost sensitivity, our agent significantly reduces its number of trades as the transaction cost rising, to reduce the loss of reward in the trades.
 
 \section{Strengths and weaknesses}
-\lipsum[12]
 
 \subsection{Strengths}
 \begin{itemize}
-\item \textbf{Applies widely}\\
+\item \textbf{Controlable risk constraint}\\
 This  system can be used for many types of airplanes, and it also
 solves the interference during  the procedure of the boarding
 airplane,as described above we can get to the  optimization
 boarding time.We also know that all the service is automate.
-\item \textbf{Improve the quality of the airport service}\\
+\item \textbf{End-to-end learning and planning}\\
 Balancing the cost of the cost and the benefit, it will bring in
 more convenient  for airport and passengers.It also saves many
-human resources for the airline. \item \textbf{}
+human resources for the airline.
+\item \textbf{Widely appliable}\\
+\lipsum[3]
 \end{itemize}
 
 \subsection{Weaknesses}
+\begin{itemize}
+  \item \textbf{1}\\
+  \lipsum[12]
+  \item \textbf{2}\\
+  \lipsum[3]
+\end{itemize}
 
 % \begin{thebibliography}{99}
 % \bibitem{1} D.~E. KNUTH   The \TeX{}book  the American
@@ -1022,58 +1036,60 @@ human resources for the airline. \item \textbf{}
   \lipsum[1-3]
 \end{memo}
 
-\begin{appendices}
+% \begin{appendices}
 
-\section{First appendix}
+% \section{First appendix}
 
-In addition, your report must include a letter to the Chief Financial Officer (CFO) of the Goodgrant Foundation, Mr. Alpha Chiang, that describes the optimal investment strategy, your modeling approach and major results, and a brief discussion of your proposed concept of a return-on-investment (ROI). This letter should be no more than two pages in length.
+% In addition, your report must include a letter to the Chief Financial Officer (CFO) of the Goodgrant Foundation, Mr. Alpha Chiang, that describes the optimal investment strategy, your modeling approach and major results, and a brief discussion of your proposed concept of a return-on-investment (ROI). This letter should be no more than two pages in length.
 
-\begin{letter}{Dear, Mr. Alpha Chiang}
+% \begin{letter}{Dear, Mr. Alpha Chiang}
 
-\lipsum[1-2]
+% \lipsum[1-2]
 
-\vspace{\parskip}
+% \vspace{\parskip}
 
-Sincerely yours,
+% Sincerely yours,
 
-Your friends
+% Your friends
 
-\end{letter}
-Here are simulation programmes we used in our model as follow.\\
+% \end{letter}
+% Here are simulation programmes we used in our model as follow.\\
 
-\textbf{\textcolor[rgb]{0.98,0.00,0.00}{Input matlab source:}}
-\lstinputlisting[language=Matlab]{./code/mcmthesis-matlab1.m}
+% \textbf{\textcolor[rgb]{0.98,0.00,0.00}{Input matlab source:}}
+% \lstinputlisting[language=Matlab]{./code/mcmthesis-matlab1.m}
 
-\section{Second appendix}
+% \section{Second appendix}
 
-some more text \textcolor[rgb]{0.98,0.00,0.00}{\textbf{Input C++ source:}}
-\lstinputlisting[language=C++]{./code/mcmthesis-sudoku.cpp}
+% some more text \textcolor[rgb]{0.98,0.00,0.00}{\textbf{Input C++ source:}}
+% \lstinputlisting[language=C++]{./code/mcmthesis-sudoku.cpp}
 
-\lstinputlisting[language=python]{./code/Harbin.py}
+% \lstinputlisting[language=python]{./code/Harbin.py}
 
-\section{Third appendix}
+% \section{Third appendix}
 
-When you need to insert a table, use this template.
+% When you need to insert a table, use this template.
 
-\begin{table}
-\centering
-\begin{tabular}{@{}lr@{}}
-  \toprule
-  Algorithm & Final value(\$) \\
-  \midrule
-  Proximal policy optimization (high risk) & 112 \\
-  {\color{gray} All in bitcoin} & {\color{gray} 76} \\
-  RNN-LSTM & 55 \\
-  Proximal policy optimization (low risk) & 21 \\
-  AR-based DP & 8 \\
-  \bottomrule
-\end{tabular}
-\caption{Final value of funds}
-\label{final-value123}
-\end{table}
+% \begin{table}
+% \centering
+% \begin{tabular}{@{}lr@{}}
+%   \toprule
+%   Algorithm & Final value(\$) \\
+%   \midrule
+%   Proximal policy optimization (high risk) & 112 \\
+%   {\color{gray} All in bitcoin} & {\color{gray} 76} \\
+%   RNN-LSTM & 55 \\
+%   Proximal policy optimization (low risk) & 21 \\
+%   AR-based DP & 8 \\
+%   \bottomrule
+% \end{tabular}
+% \caption{Final value of funds}
+% \label{final-value123}
+% \end{table}
 
-\end{appendices}
+% \end{appendices}
+
 \end{document}
+
 %%
 %% This work consists of these files mcmthesis.dtx,
 %%                                   figures/ and
