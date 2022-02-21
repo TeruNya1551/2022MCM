@@ -275,7 +275,7 @@ The first method, vector autoregression model, is a highly recognized time serie
 
 As for the second method, we try to use the recurrent neural network method to train the processed data. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the long short-term memory network to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network. The RNN-LSTM model is very common and its code is open source. Thus, we built the network and predicted the data through the open source deep learning library. 
 
-We use the bitcoin price data to train our models, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable.(The prediction results of the autoregressive model will be shown in figure\ref{fig:prediction} together with the prediction results of the RNN-TLSM model and the workflow of the prediction model is shown in figure \ref{AR}.).
+We use the bitcoin price data to train our models, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable. The prediction results of the autoregressive model will be shown in figure\ref{fig:prediction} together with the prediction results of the RNN-TLSM model and the workflow of the prediction model is shown in figure \ref{AR}.
 
 \begin{figure}[h]
   \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
@@ -547,6 +547,15 @@ In the data table given, the price data for gold is missing, as mentioned above,
 
 Note that this process will fill in the missing data of gold as NAN, that is, Not A Number. Our model has a special treatment for the missing data of gold, which will be explained in the following description.
 
+In order to make the model converge quickly, we normalize the data, that is, perform the following transformations:
+
+\[
+  \pmb{v} \leftarrow \frac{\bar{\pmb{v}}}{\mbox{std}(\pmb{v})}
+\]
+
+% 其中$\pmb{v}$是observation中的价格矢量。
+
+where $\pmb{v}$ is the price vector in the observation.
 
 \subsection{Model building}
 
@@ -713,6 +722,17 @@ providing a intuitive representation of the ratio of $\rho_t$ to $\rho_1$.
 The agent uses $\Sigma r_t$ to value current actions and make self-adjustment
 in the reinforcement learning process.
 The learning stops when new actions no longer provide significant improvement in $\Sigma r_t$.
+
+\subsubsection{The observation}
+
+% 在强化学习概念中，observation是神经网络对环境的认知术语。在我们的模型中，我们将observation设定为标准化的前$n$天价格矩阵，以及目前拥有的资产分布情况，即$\pmb{w}$
+
+In reinforcement learning concepts, observation is the cognitive term for a neural network's environment. In our model, we set the observation to be the normalized price matrix of the previous $n$ days, and the distribution of assets currently owned, i.e. $\pmb{w}$.
+
+% 之所以给模型输入$\pmb{w}$是因为一个良好的agent应该知道他在某一个时间刻拥有多少的资产比例。如果agent希望习得根据transaction cost的变化而改变交易次数，也就是变得交易谨慎，他必须要学习什么输出$\pmb{w}$是“不交易的”，输入$\pmb{w}$可以使模型更快地收敛。
+
+The reason for entering $\pmb{w}$ into the model is because a good agent should know what proportion of assets it has at a given moment. If the agent wants to learn to change the number of transactions according to the change of transaction cost, that is, to become transaction prudent, he must learn what output $\pmb{w}$ is "no transaction", enter $\pmb{w}$ Can make the model converge faster.
+
 
 \subsubsection{Risk Constraint \label{risk-constraint}}
 
