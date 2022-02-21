@@ -73,25 +73,39 @@
 \usepackage{float} %设置图片浮动位置的宏包
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
-\title{Portfolio Arrangement}
-\author{\small \href{https://www.latexstudio.net/}
+\title{End-to-end Reinforcement Learning-Based Novel Portfolio Management Model}
+\author{\small \href{MCM 2022 Team 2207690}
   {\includegraphics[width=7cm]{mcmthesis-logo}}}
 \date{\today}
 \begin{document}
+
 \begin{abstract}
-Use this template to begin typing the first page (summary page) of your electronic report. This template uses a 12-point Times New Roman font. Submit your paper as an Adobe PDF electronic file (e.g. 1111111.pdf), typed in English, with a readable font of at least 12-point type.
+% Use this template to begin typing the first page (summary page) of your electronic report. This template uses a 12-point Times New Roman font. Submit your paper as an Adobe PDF electronic file (e.g. 1111111.pdf), typed in English, with a readable font of at least 12-point type.
 
-Do not include the name of your school, advisor, or team members on this or any page.
+% Do not include the name of your school, advisor, or team members on this or any page.
 
-Papers must be within the 25 page limit.
+% Papers must be within the 25 page limit.
 
-Be sure to change the control number and problem choice above.
-You may delete these instructions as you begin to type your report here.
+% Be sure to change the control number and problem choice above.
+% You may delete these instructions as you begin to type your report here.
 
-Follow us @COMAPMath on Twitter or COMAPCHINAOFFICIAL on Weibo for the most up to date contest information.
+% Follow us @COMAPMath on Twitter or COMAPCHINAOFFICIAL on Weibo for the most up to date contest information.
+
+Portfolio management is the process of managing investments,
+constantly rearranging a certain amount of funds into several products or assets,
+aiming at maximizing profit and ensuring minimizing risks at the same time.
+
+This article presents an portfolio management model based on end-to-end reinforcement learning, using the proximal policy optimization(PPO).
+Also, other multi-staged methods are used as a comparison, including RNN-LSTM (i.e. Recurrent Neural Network with Long Short-Term Memory) and the vector autoregressive model.
+
+The article proposes a method to control trading risk artificially, introducing the market risk premium.
+It is used to control the maximum amount of risk that can be accepted in each transaction as a way of adjusting the relationship between return and risk.
+
+All the methods are examined with the data given, during the five-year trading period from 9/11/2016 to 9/10/2021.
+The learning result shows that the PPO with high risk constraint gained the most, by a factor of 112.
 
 \begin{keywords}
-keyword1; keyword2
+Portfolio arrangement; Vector autoregressive model; Reinforcement learning;
 \end{keywords}
 \end{abstract}
 \maketitle
@@ -115,7 +129,7 @@ In terminology, this method is called \textit{portfolio management}.
 
 Portfolio management is the process of managing investments,
 constantly rearranging a certain amount of funds into several products or assets,
-aiming at maximizing profit and ensuring low market risks at the same time.
+aiming at maximizing profit and ensuring low market risks at the same time\cite{jiang2017deep}.
 There have been several traditional methods to solve this problem,
 which can be roughly classified into these four categories\cite{li2014online}:
 
@@ -418,7 +432,7 @@ trying to improve the algorithm accuracy.
 
 \subsubsection{One-staged methods}
 
-Compared to multi-staged methods, a one-staged method directly arrange its actions from the past data, skipping the processes between the input and the output\cite{lecun2004autonomous}.
+Compared to two-staged methods, a one-staged method is end-to-end, which means it directly arrange its actions from the past data, skipping the processes between the input and the output\cite{lecun2004autonomous}.
 In a multi-staged method, a task is solved in multiple steps, where the input to each step is the output of the previous step.
 This can cause accumulation of inaccuracy which may be exponential as the number of steps increases in the worst case.
 One-staged methods eliminate the influence between different steps and reduces the complexity of the algorithm.
@@ -552,16 +566,16 @@ r_t(\theta) = \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_{\mathrm{old}}}(a_t | s
 and we let
 
 \[
-  L^{CLIP}(\theta) = \hat{\mathbb{E}}_t \left[ \min \left(r_t(\theta) \hat{A}_t, \mathrm{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon)\right) \hat{A}_t \right] 
+  L^{CLIP}(\theta) = \hat{\mathbb{E}}_t \left[ \min \left(r_t(\theta) \hat{A}_t, \mathrm{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon)\right) \hat{A}_t \right]
 \]
 
 Where $\epsilon$ is a hyperparameter, generally set to $\epsilon = 0.2$ , and then use SGD to optimize $L^{CLIP}$.
 
 \begin{itemize}
-  \item When the advantage function is $\hat{A}_t > 0$ \par 
-  it means that the strategy is better at this time, and the optimization efforts should be increased, but when the $r_t(\theta) > 1 - \epsilon$ is used, it will be clipped as $1 - \epsilon$, and the Min operation will select $r_t(\theta) = 1 - \epsilon$, which will prevent it from over-optimized. 
-  \item When the Advantage function is $\hat{A}_t < 0$ \par 
-  it means that this strategy is worse. To reduce its optimization, select a smaller $r_t(\theta)$. When $r_t(\theta) < 1 - \epsilon$, it will be clipped to $1 - \epsilon$, but the Min function will still be Select the smaller $r_t(\theta)$. 
+  \item When the advantage function is $\hat{A}_t > 0$ \par
+  it means that the strategy is better at this time, and the optimization efforts should be increased, but when the $r_t(\theta) > 1 - \epsilon$ is used, it will be clipped as $1 - \epsilon$, and the Min operation will select $r_t(\theta) = 1 - \epsilon$, which will prevent it from over-optimized.
+  \item When the Advantage function is $\hat{A}_t < 0$ \par
+  it means that this strategy is worse. To reduce its optimization, select a smaller $r_t(\theta)$. When $r_t(\theta) < 1 - \epsilon$, it will be clipped to $1 - \epsilon$, but the Min function will still be Select the smaller $r_t(\theta)$.
 
 \end{itemize}
 
