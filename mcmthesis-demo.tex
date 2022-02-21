@@ -193,7 +193,10 @@ and predict how much it will become five years later, based on the formerly deve
 
 \section{Analysis of the Problem}
 
-
+There is a huge amount of data in the trading market which change frequently.
+It is difficult to define mathematical formulas that represent the meaning of movements in the market in an artificial way, and some subjectivity will inevitably be introduced if we really do so.
+Thus, the method of machine learning seems to be more appropriate.
+We decide to try some of the machine learning methods, including VAR, RNN-LSTM and PPO, and pick the best algorithm among them.
 
 % \subsection{Transaction Costs}
 
@@ -963,7 +966,7 @@ And finally, the value of the initial \$1,000 is shown in table \ref{final-value
 As mentioned in the hypothesis section, transaction cost highly affects the decision-making process and the final result of the algorithm.
 A higher transaction cost means more losses with equal transaction amounts,
 leading to negative rewards given to the agent.
-The agent will try to lower these losses, by the means of decreasing total transaction amount.
+The agent will try to lower these losses, by means of decreasing total transaction amount.
 This can be done by reducing rather the amount per trade or the times of transaction.
 Figure \ref{Transaction-cost} shows the transaction count of bitcoin against its transaction cost.
 With the percentage of transaction cost increasing, the agent significantly reduces the number of transactions.
@@ -993,7 +996,7 @@ As for the transaction cost sensitivity, our agent significantly reduces its num
 \item \textbf{Controlable risk constraint}\\
 By setting different cut-offs for the risk premium, we can artificially adjust the behaviour of agents and thus the relationship between return and risk. This incorporates the idea of supervised-learning into reinforcement learning and makes our model applicable to market traders with different objectives.
 \item \textbf{End-to-end learning and planning}\\
-The end-to-end PPO algorithm is more accurate than the multi-stage algorithm, considering the fact that it combines multiple steps and eliminates the effects between them.
+The end-to-end PPO algorithm is more accurate than the two-staged algorithm, considering the fact that it combines multiple steps and eliminates the effects between them.
 \item \textbf{Appliable for different assets}\\
 This model does not only apply for the transactions of bitcoin and gold.
 It can also be used to forecast and plan the distribution of other types of assets such as stocks and shares.
