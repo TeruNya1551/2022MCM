@@ -273,9 +273,10 @@ In the prediction stage, there are mainly two methods in the industry, namely Ve
 
 The first method, vector autoregression model, is a highly recognized time series analysis model. In previous research, vector autoregression model has been widely used in investment management, quantitative trading and so on. These models usually model the existing data, and then select the last piece of data for prediction and comparison as a reference. The autoregressive model has been shown to have very good interpolation accuracy and can also accurately predict the development trend in the next few days in terms of prediction.
 
-As for the second method, we try to use the recurrent neural network method to train the processed data. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the long short-term memory network to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network. The RNN-LSTM model is very common and its code is open source. Thus, we built the network and predicted the data through the open source deep learning library. 
+As for the second method, we try to use the recurrent neural network method to train the processed data. However, if we only use the recurrent neural network, the model we build will be unable to deal with the exponential explosion or gradient of the weights caused by the recursion. It is difficult to obtain the data changes of bitcoin and gold value in a long period of time due to the disappearance of the problem, so on the basis of using the recurrent neural network, we use the long short-term memory network to optimize, so that the neural network The time points covered by the model are further advanced, extending the memory of the network. The RNN-LSTM model is very common and its code is open source. Thus, we built the network and predicted the data through the open source deep learning library.
 
-We use the bitcoin price data to train our models, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable. The prediction results of the autoregressive model will be shown in figure\ref{fig:prediction} together with the prediction results of the RNN-TLSM model and the workflow of the prediction model is shown in figure \ref{AR}.
+We use the bitcoin price data to train our models, with the last seven days of data as the test set and other data as the training set. Our model will predict the last 7 days of price of bitcoin, then use these price data to compare with the actual price to judge whether the prediction is reasonable.
+The prediction results of the autoregressive model will be shown in figure\ref{fig:prediction} together with the prediction results of the RNN-TLSM model and the workflow of the prediction model is shown in figure \ref{AR}.
 
 \begin{figure}[h]
   \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
@@ -396,24 +397,28 @@ We use the data except the last seven days to train our model and compare the pr
 
 % 两阶段的模型通常依赖于在第一阶段准确的预测，而第二阶段的规划则相对不那么重要且原始。这直接导致两阶段模型通常较为“短视”他们不能根据长期增长情况作出长远规划。
 
-Two-stage models typically rely on accurate predictions in the first stage, while planning in the second stage is relatively less important and primitive. In addition, both models have a certain lag in time, and this leads directly to the fact that two-stage models are often "short-sighted". Thus, they cannot make long-term plans based on long-term growth.
+Two-stage models typically rely on accurate predictions in the first stage, while planning in the second stage is relatively less important and primitive. In addition, both models have a certain lag in time, and this leads directly to the fact that two-stage models are often ``short-sighted''. Thus, they cannot make long-term plans based on long-term growth.
 
 However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from any two-staged model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks.
 
 % 我们的工作将使用这些two-staged方法作为对照实验，评估我们更优化的模型的performance。
 
-Our work will use these two-staged methods as control experiments to evaluate the performance of our more optimized models.
+% Our work will use these two-staged methods as control experiments to evaluate the performance of our more optimized models.
 
 
 \section{Reinforcement learning model}
 
 As concluded before,
-the method of predicting with VAR is straightforward,
+the method of predicting with VAR is straightforward to think of,
 but still not accurate enough.
-Thus, this section presents one possible solution using the Reinforcement learning (RL) model,
+Thus, this section presents a possible solution using the Reinforcement learning (RL) model, one of the one-staged methods,
 trying to improve the algorithm accuracy.
 
 \subsection{Introduction to reinforcement learning}
+
+\subsubsection{One-staged methods}
+
+
 
 \subsubsection{Deep learning}
 
@@ -735,21 +740,21 @@ The reason for entering $\pmb{w}$ into the model is because a good agent should 
 
 \begin{figure}[H]
 \centering
- %set default line width to 0.75pt        
+ %set default line width to 0.75pt
 \scalebox{0.6}[0.6]{
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
   %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
-  
-  %Shape: Cube [id:dp0031259884345929967] 
+
+  %Shape: Cube [id:dp0031259884345929967]
   \draw   (391,124.4) -- (435.4,80) -- (556,80) -- (556,183.6) -- (511.6,228) -- (391,228) -- cycle ; \draw   (556,80) -- (511.6,124.4) -- (391,124.4) ; \draw   (511.6,124.4) -- (511.6,228) ;
-  %Shape: Grid [id:dp3629674359367516] 
+  %Shape: Grid [id:dp3629674359367516]
   \draw  [draw opacity=0] (86,67) -- (207,67) -- (207,188) -- (86,188) -- cycle ; \draw   (86,67) -- (86,188)(106,67) -- (106,188)(126,67) -- (126,188)(146,67) -- (146,188)(166,67) -- (166,188)(186,67) -- (186,188)(206,67) -- (206,188) ; \draw   (86,67) -- (207,67)(86,87) -- (207,87)(86,107) -- (207,107)(86,127) -- (207,127)(86,147) -- (207,147)(86,167) -- (207,167)(86,187) -- (207,187) ; \draw    ;
-  %Curve Lines [id:da9295803655851189] 
+  %Curve Lines [id:da9295803655851189]
   \draw    (206,127) .. controls (245.6,97.3) and (344.99,202.85) .. (385.78,175.86) ;
   \draw [shift={(387,175)}, rotate = 143.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
-  %Curve Lines [id:da9533332638936705] 
+  %Curve Lines [id:da9533332638936705]
   \draw    (176,257) .. controls (216,227) and (260,123) .. (334,172) ;
-  
+
   % Text Node
   \draw (405,36) node [anchor=north west][inner sep=0.75pt]   [align=left] {The Observation};
   % Text Node
@@ -760,8 +765,8 @@ The reason for entering $\pmb{w}$ into the model is because a good agent should 
   \draw (254,142.4) node [anchor=north west][inner sep=0.75pt]    {$\otimes $};
   % Text Node
   \draw (28,73) node [anchor=north west][inner sep=0.75pt]   [align=left] {BTC\\\\Gold\\\\Cash};
-  
-  
+
+
   \end{tikzpicture}
 }
 \caption{The building process of observation arrays}
