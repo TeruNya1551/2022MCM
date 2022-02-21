@@ -450,7 +450,119 @@ and shares a similar structure with it, as diagram \ref{ANN} shows:
 \begin{figure}[h]
 \small
 \centering
-\includegraphics[width=5cm]{Colored_neural_network.svg.png}
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Circle [id:dp023250363705630606] 
+\draw   (97,113) .. controls (97,104.72) and (103.72,98) .. (112,98) .. controls (120.28,98) and (127,104.72) .. (127,113) .. controls (127,121.28) and (120.28,128) .. (112,128) .. controls (103.72,128) and (97,121.28) .. (97,113) -- cycle ;
+%Shape: Circle [id:dp14005858666202986] 
+\draw   (158,125) .. controls (158,116.72) and (164.72,110) .. (173,110) .. controls (181.28,110) and (188,116.72) .. (188,125) .. controls (188,133.28) and (181.28,140) .. (173,140) .. controls (164.72,140) and (158,133.28) .. (158,125) -- cycle ;
+%Shape: Circle [id:dp9659095050577191] 
+\draw   (159,172) .. controls (159,163.72) and (165.72,157) .. (174,157) .. controls (182.28,157) and (189,163.72) .. (189,172) .. controls (189,180.28) and (182.28,187) .. (174,187) .. controls (165.72,187) and (159,180.28) .. (159,172) -- cycle ;
+%Shape: Circle [id:dp19761003105461006] 
+\draw   (159,219) .. controls (159,210.72) and (165.72,204) .. (174,204) .. controls (182.28,204) and (189,210.72) .. (189,219) .. controls (189,227.28) and (182.28,234) .. (174,234) .. controls (165.72,234) and (159,227.28) .. (159,219) -- cycle ;
+%Shape: Circle [id:dp8667193841852548] 
+\draw   (94,158) .. controls (94,149.72) and (100.72,143) .. (109,143) .. controls (117.28,143) and (124,149.72) .. (124,158) .. controls (124,166.28) and (117.28,173) .. (109,173) .. controls (100.72,173) and (94,166.28) .. (94,158) -- cycle ;
+%Shape: Circle [id:dp23954880401190182] 
+\draw   (95,202) .. controls (95,193.72) and (101.72,187) .. (110,187) .. controls (118.28,187) and (125,193.72) .. (125,202) .. controls (125,210.28) and (118.28,217) .. (110,217) .. controls (101.72,217) and (95,210.28) .. (95,202) -- cycle ;
+%Shape: Circle [id:dp8243567436815463] 
+\draw   (158,80) .. controls (158,71.72) and (164.72,65) .. (173,65) .. controls (181.28,65) and (188,71.72) .. (188,80) .. controls (188,88.28) and (181.28,95) .. (173,95) .. controls (164.72,95) and (158,88.28) .. (158,80) -- cycle ;
+%Shape: Circle [id:dp7678342657522533] 
+\draw   (216,111) .. controls (216,102.72) and (222.72,96) .. (231,96) .. controls (239.28,96) and (246,102.72) .. (246,111) .. controls (246,119.28) and (239.28,126) .. (231,126) .. controls (222.72,126) and (216,119.28) .. (216,111) -- cycle ;
+%Shape: Circle [id:dp45348365598207885] 
+\draw   (216,155) .. controls (216,146.72) and (222.72,140) .. (231,140) .. controls (239.28,140) and (246,146.72) .. (246,155) .. controls (246,163.28) and (239.28,170) .. (231,170) .. controls (222.72,170) and (216,163.28) .. (216,155) -- cycle ;
+%Shape: Circle [id:dp22705733084829594] 
+\draw   (219,198) .. controls (219,189.72) and (225.72,183) .. (234,183) .. controls (242.28,183) and (249,189.72) .. (249,198) .. controls (249,206.28) and (242.28,213) .. (234,213) .. controls (225.72,213) and (219,206.28) .. (219,198) -- cycle ;
+%Straight Lines [id:da3059498079245063] 
+\draw    (125,202) -- (157.21,218.11) ;
+\draw [shift={(159,219)}, rotate = 206.57] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da46570874305945875] 
+\draw    (125,202) -- (157.5,173.32) ;
+\draw [shift={(159,172)}, rotate = 138.58] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6505207736753218] 
+\draw    (125,202) -- (157.21,126.84) ;
+\draw [shift={(158,125)}, rotate = 113.2] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da5871374538388122] 
+\draw    (125,202) -- (157.48,81.93) ;
+\draw [shift={(158,80)}, rotate = 105.14] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da07786863413698542] 
+\draw    (127,113) -- (154.54,87.36) ;
+\draw [shift={(156,86)}, rotate = 137.05] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9923729408372759] 
+\draw    (127,113) -- (156.13,124.28) ;
+\draw [shift={(158,125)}, rotate = 201.16] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7404871085973075] 
+\draw    (127,113) -- (158.05,170.24) ;
+\draw [shift={(159,172)}, rotate = 241.53] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6050885103328388] 
+\draw    (127,113) -- (158.42,217.09) ;
+\draw [shift={(159,219)}, rotate = 253.2] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da03515269249092157] 
+\draw    (124,158) -- (158,217.27) ;
+\draw [shift={(159,219)}, rotate = 240.15] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da5103240925960375] 
+\draw    (124,158) -- (157.14,171.26) ;
+\draw [shift={(159,172)}, rotate = 201.8] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8580590409279631] 
+\draw    (124,158) -- (157.14,171.26) ;
+\draw [shift={(159,172)}, rotate = 201.8] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da5670686485400354] 
+\draw    (125.5,159) -- (156.62,126.45) ;
+\draw [shift={(158,125)}, rotate = 133.71] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8158328328775906] 
+\draw    (125.5,159) -- (155.23,87.85) ;
+\draw [shift={(156,86)}, rotate = 112.68] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8478869547982134] 
+\draw    (188,80) -- (214.66,109.52) ;
+\draw [shift={(216,111)}, rotate = 227.91] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9043870128078287] 
+\draw    (188,80) -- (215.3,153.13) ;
+\draw [shift={(216,155)}, rotate = 249.53] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da07358462738601002] 
+\draw    (188,80) -- (217.49,191.07) ;
+\draw [shift={(218,193)}, rotate = 255.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6810266920841922] 
+\draw    (188,125) -- (217.19,191.17) ;
+\draw [shift={(218,193)}, rotate = 246.19] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da17365539593691914] 
+\draw    (188,125) -- (215.35,143.86) ;
+\draw [shift={(217,145)}, rotate = 214.59] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da48650858832648336] 
+\draw    (188.5,126.5) -- (214.26,111.98) ;
+\draw [shift={(216,111)}, rotate = 150.59] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da31407647601025823] 
+\draw    (188.75,174.75) -- (215.91,144.73) ;
+\draw [shift={(217.25,143.25)}, rotate = 132.14] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7505657350915957] 
+\draw    (188.5,176.5) -- (215.23,112.84) ;
+\draw [shift={(216,111)}, rotate = 112.77] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da33144907153147674] 
+\draw    (188.75,177.25) -- (216.24,192.05) ;
+\draw [shift={(218,193)}, rotate = 208.3] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da6159399097362944] 
+\draw    (189,219) -- (216.51,194.34) ;
+\draw [shift={(218,193)}, rotate = 138.12] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da2691855948960916] 
+\draw    (189,219) -- (216.29,146.87) ;
+\draw [shift={(217,145)}, rotate = 110.73] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da7800022941553232] 
+\draw    (189.38,222.13) -- (215.53,112.94) ;
+\draw [shift={(216,111)}, rotate = 103.47] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (49,74) node [anchor=north west][inner sep=0.75pt]   [align=left] {input layer};
+% Text Node
+\draw (130,36) node [anchor=north west][inner sep=0.75pt]   [align=left] {hidden layer};
+% Text Node
+\draw (229,75) node [anchor=north west][inner sep=0.75pt]   [align=left] {output layer};
+
+
+\end{tikzpicture}
+
 \caption{Artificial neural network} \label{ANN}
 \end{figure}
 
