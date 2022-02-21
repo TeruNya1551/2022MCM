@@ -540,7 +540,27 @@ $E(\Sigma R)$.
 
 Proximal policy optimization (PPO) is a policy gradient method for reinforcement learning.
 
-tbd
+Here, we use PPO to interact with the environment and update policy $\pi_\theta(a_t | s_t)$ hrough a clipped surrogate function $L^{CLIP}$. Assuming that
+
+\[
+r_t(\theta) = \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_{\mathrm{old}}}(a_t | s_t)}
+\]
+
+and we let
+
+\[
+  L^{CLIP}(\theta) = \hat{\mathbb{E}}_t \left[ \min \left(r_t(\theta) \hat{A}_t, \mathrm{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon)\right) \hat{A}_t \right] 
+\]
+
+Where $\epsilon$ is a hyperparameter, generally set to $\epsilon = 0.2$ , and then use SGD to optimize $L^{CLIP}$.
+
+\begin{itemize}
+  \item When the advantage function is $\hat{A}_t > 0$ \par 
+  it means that the strategy is better at this time, and the optimization efforts should be increased, but when the $r_t(\theta) > 1 - \epsilon$ is used, it will be clipped as $1 - \epsilon$, and the Min operation will select $r_t(\theta) = 1 - \epsilon$, which will prevent it from over-optimized. 
+  \item When the Advantage function is $\hat{A}_t < 0$ \par 
+  it means that this strategy is worse. To reduce its optimization, select a smaller $r_t(\theta)$. When $r_t(\theta) < 1 - \epsilon$, it will be clipped to $1 - \epsilon$, but the Min function will still be Select the smaller $r_t(\theta)$. 
+
+\end{itemize}
 
 \subsection{Data Treatments}
 
