@@ -96,7 +96,7 @@ constantly rearranging a certain amount of funds into several products or assets
 aiming at maximizing profit and ensuring minimizing risks at the same time.
 
 This article presents a portfolio management model based on end-to-end reinforcement learning, using the proximal policy optimization(PPO).
-Also, other multi-staged methods are used as a comparison, including RNN-LSTM (i.e. Recurrent Neural Network with Long Short-Term Memory) and the vector autoregressive model.
+Also, other multi-stage methods are used as a comparison, including RNN-LSTM (i.e. Recurrent Neural Network with Long Short-Term Memory) and the vector autoregressive model.
 
 The article proposes a method to control trading risk artificially, introducing the market risk premium.
 It is used to control the maximum amount of risk that can be accepted in each transaction as a way of adjusting the relationship between return and risk.
@@ -271,12 +271,12 @@ and predict how much it will become five years later, based on the formerly deve
 %   \right)!}}} \eqno (1)
 % \]
 
-\section{The two-staged methods}
+\section{The two-stage methods}
 
 \subsection{Introduction}
 
-% It is a general approach to make regressing from past price dates and forecasting a period price. Then design an algorithm to make a plan for rearranging the ratio of assets. These methods can be classified as ``two-staged methods''.
-The workflow of a two-staged method can be roughly summarized into two steps:
+% It is a general approach to make regressing from past price dates and forecasting a period price. Then design an algorithm to make a plan for rearranging the ratio of assets. These methods can be classified as ``two-stage methods''.
+The workflow of a two-stage method can be roughly summarized into two steps:
 
 \begin{itemize}
   \item Make regressing from past price dates and forecasting a period price;
@@ -413,11 +413,11 @@ We use the data except the last seven days to train our model and compare the pr
 
 Two-stage models typically rely on accurate predictions in the first stage, while planning in the second stage is relatively less important and primitive. In addition, both models have a certain lag in time, and this leads directly to the fact that two-stage models are often ``short-sighted''. Thus, they cannot make long-term plans based on long-term growth.
 
-However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from any two-staged model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks.
+However, the performance of an algorithm capable of planning a portfolio based on predictions obtained from any two-stage model depends on the accuracy of the model's predictions to a large extent, and it is obvious that the future market prices are too complex to predict accurately. Also, if we translate the price predictions, which are not market behavior actually, into actions, we have to build an additional layer of logic.If we establish a neural model on this base, then we can no longer take transaction cost into account.In this case of manual coding, we can not consider the method as reliable fully machine learning.As a result we turned to trying to apply reinforcement learning to make predictions on the data.Compared with supervised learning that can only consider one-time problems, focus on short-term benefits and consider immediate rewards, reinforcement learning has a more long-term perspective, considering long-term rewards and can find optimal solutions to many problems. Furthermore, the reinforcement learning approach we present below shows a more general ability to consider transaction costs as one of the important risks.
 
-% 我们的工作将使用这些two-staged方法作为对照实验，评估我们更优化的模型的performance。
+% 我们的工作将使用这些two-stage方法作为对照实验，评估我们更优化的模型的performance。
 
-% Our work will use these two-staged methods as control experiments to evaluate the performance of our more optimized models.
+% Our work will use these two-stage methods as control experiments to evaluate the performance of our more optimized models.
 
 
 \section{Reinforcement learning model}
@@ -432,8 +432,8 @@ trying to improve the algorithm accuracy.
 
 \subsubsection{One-staged methods}
 
-Compared to two-staged methods, a one-staged method is end-to-end, which means it directly arrange its actions from the past data, skipping the processes between the input and the output\cite{lecun2004autonomous}.
-In a multi-staged method, a task is solved in multiple steps, where the input to each step is the output of the previous step.
+Compared to two-stage methods, a one-staged method is end-to-end, which means it directly arrange its actions from the past data, skipping the processes between the input and the output\cite{lecun2004autonomous}.
+In a multi-stage method, a task is solved in multiple steps, where the input to each step is the output of the previous step.
 This can cause accumulation of inaccuracy which may be exponential as the number of steps increases in the worst case.
 One-staged methods eliminate the influence between different steps and reduces the complexity of the algorithm.
 
@@ -993,7 +993,7 @@ As for the transaction cost sensitivity, our agent significantly reduces its num
 \item \textbf{Controlable risk constraint}\\
 By setting different cut-offs for the risk premium, we can artificially adjust the behaviour of agents and thus the relationship between return and risk. This incorporates the idea of supervised-learning into reinforcement learning and makes our model applicable to market traders with different objectives.
 \item \textbf{End-to-end learning and planning}\\
-The end-to-end PPO algorithm is more accurate than the multi-staged algorithm, considering the fact that it combines multiple steps and eliminates the effects between them.
+The end-to-end PPO algorithm is more accurate than the multi-stage algorithm, considering the fact that it combines multiple steps and eliminates the effects between them.
 \item \textbf{Appliable for different assets}\\
 This model does not only apply for the transactions of bitcoin and gold.
 It can also be used to forecast and plan the distribution of other types of assets such as stocks and shares.
@@ -1002,8 +1002,8 @@ It can also be used to forecast and plan the distribution of other types of asse
 \subsection{Weaknesses}
 \begin{itemize}
   \item \textbf{Relatively long learning process}\\
-  The end-to-end PPO algorithm consumes more resources and takes longer compared to two-staged methods.
-  In our case, the model took one hour to train to get better results, while two-staged models tend to converge quickly.
+  The end-to-end PPO algorithm consumes more resources and takes longer compared to two-stage methods.
+  In our case, the model took one hour to train to get better results, while two-stage models tend to converge quickly.
   \item \textbf{Reliance on substantial historical data}\\
   The PPO algorithm relies more on historical data than some of the other algorithms such as VAR. This means that it does not perform well in cases where there is less historical data.
 \end{itemize}
