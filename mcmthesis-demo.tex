@@ -90,22 +90,20 @@
 % You may delete these instructions as you begin to type your report here.
 
 % Follow us @COMAPMath on Twitter or COMAPCHINAOFFICIAL on Weibo for the most up to date contest information.
+Portfolio management is the process of managing investments, continually rearranging a certain amount of money into several products or assets, with the goal of maximizing profit while ensuring that risk is minimized.
 
-Portfolio management is the process of managing investments,
-constantly rearranging a certain amount of funds into several products or assets,
-aiming at maximizing profit and ensuring minimizing risks at the same time.
+The trend of Bitcoin's value changes violently. It is not only affected by historical data, but also by many external factors that are difficult to predict in advance. Therefore, this feature will lead to inaccurate prediction models. Portfolios obtained using the more conventional forecast-first-planning multi-stage approach are not adaptive nor efficient.
 
-This article presents a portfolio management model based on end-to-end reinforcement learning, using the proximal policy optimization(PPO).
-Also, other multi-stage methods are used as a comparison, including RNN-LSTM (i.e. Recurrent Neural Network with Long Short-Term Memory) and the vector autoregressive model.
+To better manage portfolios and maximize returns with lower risk, we propose an end-to-end reinforcement learning-based portfolio management model using Proximal Policy Optimization (PPO). In addition, other multi-stage methods are used for comparison, including RNN-LSTM (i.e. recurrent neural network with long short-term memory) and vector autoregressive models.
 
-The article proposes a method to control trading risk artificially, introducing the market risk premium.
-It is used to control the maximum amount of risk that can be accepted in each transaction as a way of adjusting the relationship between return and risk.
+This paper proposes a method to artificially control transaction risk, introducing market risk premium which is used to control the maximum amount of risk that can be accepted in each trade as a way to adjust the relationship between return and risk.
 
-All the methods are examined with the data given, during the five-year trading period from 9/11/2016 to 9/10/2021.
-The learning result shows that the PPO with high risk constraint gained the most, by a factor of 115.
+All methods are evaluated using the given data during a five-year trading period from September 11, 2016 to September 10, 2021. The learning results show that PPO with high risk constraints achieves the most benefit, increasing by a factor of 115.
+
+The advantage of this model is not only that it can avoid planning errors due to forecast inaccuracy, but also incorporates the idea of supervised learning, making our model suitable for different types of investment environments. However, it may take a long time to train and requires a large amount of data to adjust parameters.
 
 \begin{keywords}
-Portfolio arrangement; Vector autoregressive model; Reinforcement learning;
+Portfolio arrangement; Vector autoregressive model; Reinforcement learning; End-to-end optimization; RNN-LSTM model;
 \end{keywords}
 \end{abstract}
 \maketitle
